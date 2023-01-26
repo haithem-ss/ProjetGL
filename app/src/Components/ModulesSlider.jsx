@@ -16,6 +16,8 @@ import {
     Box,
     Container
 } from '@chakra-ui/react'
+import useModules from '../Hooks/UseModules'
+
 import ModulesCard from "./ModulesCard";
 
 export default function App() {
@@ -29,6 +31,7 @@ export default function App() {
         sliderRef.current.swiper.slideNext();
       }, []);
 
+      let modules=useModules()
 
     return (
         <Container maxW="90vw" margin="2rem auto" >
@@ -79,13 +82,11 @@ export default function App() {
                       },
                   }}
             >
-                <SwiperSlide><ModulesCard/></SwiperSlide>
-                <SwiperSlide><ModulesCard/></SwiperSlide>
-                <SwiperSlide><ModulesCard/></SwiperSlide>
-                <SwiperSlide><ModulesCard/></SwiperSlide>
-                <SwiperSlide><ModulesCard/></SwiperSlide>
-                <SwiperSlide><ModulesCard/></SwiperSlide>
-                <SwiperSlide><ModulesCard/></SwiperSlide>
+                {modules!=null ? <>
+                {modules.map((item)=>(<SwiperSlide key={modules.indexOf(item)}><ModulesCard nom={item.nom} image={item.image_url}/></SwiperSlide>))}
+                </>:null}
+                
+
 
 
 

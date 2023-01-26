@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react'
 import ModuleBackground from "../assets/ModuleBackground.png"
 
-export default function () {
+export default function ({nom,image}) {
     return <>
         <Box
             userSelect="none"
@@ -28,11 +28,11 @@ export default function () {
                 background: "linear-gradient(0deg, #212529 0%, rgba(33, 37, 41, 0) 100%);",
                 zIndex: 1
             }}
-            backgroundImage={`url(${ModuleBackground})`}
+            backgroundImage={`url(http://localhost:8000${image})`}
             backgroundSize="contain"
             height={200}>
             <Heading size="md" color="white" zIndex="1" margin=" 0 0 0.25rem 0.5rem ">
-                Subject
+            {nom}
             </Heading>
         </Box>
     </>
