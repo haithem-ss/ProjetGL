@@ -10,7 +10,7 @@ export default function ({
     title,
     buttonVariant
 }) {
-    return <Container maxW="90vw" margin="2rem auto" >
+    return < >
         <Heading fontSize="2xl" >
             {title}
         </Heading>
@@ -51,5 +51,5 @@ export default function ({
         </Center>:null}
 
 
-    </Container>
+    </>
 }

@@ -11,15 +11,15 @@ import Chat from '../Components/Chat'
 
 export default function () {
     return <>
-        <Tabs variant='unstyled'>
+        <Tabs variant='unstyled' padding="0">
             <TabList gap={1}>
-                {/* <Tab borderRadius={0} _hover={{borderColor:"#343A40"}} _selected={{ color: 'white', bg: '#343A40' }} outline="0px">Anouncements</Tab> */}
+                <Tab borderRadius={0} _hover={{borderColor:"#343A40"}} _selected={{ color: 'white', bg: '#343A40' }} outline="0px">Anouncements</Tab>
                 <Tab borderRadius={0} _hover={{borderColor:"#343A40 "}} _selected={{ color: 'white', bg: '#343A40' }} outline="0px">Messages</Tab>
             </TabList>
-            <TabPanels>
-                {/* <TabPanel>
+            <TabPanels padding="0">
+                <TabPanel>
                     <CardsContainer variant={0} />
-                </TabPanel> */}
+                </TabPanel>
                 <TabPanel>
                     <Chat/>
                 </TabPanel>

@@ -18,9 +18,14 @@ class Adresse (models.Model):
     longitude=models.CharField(max_length=255,null=True)
     def __str__(self):
         return f"{self.latitiude},{self.longitude}"
+
+def upload_to(instance, filename):
+    return 'images/{filename}'.format(filename=filename)
 class Module(models.Model):
     nom=models.CharField(max_length=50,null=False,unique=True,db_index=True)
     description=models.CharField(max_length=255,null=False)
+    image_url = models.ImageField(upload_to=upload_to, blank=True, null=True)
+
     def __str__(self):
         return self.nom
 
