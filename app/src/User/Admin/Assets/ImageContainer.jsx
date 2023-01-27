@@ -8,10 +8,10 @@ const ImageContainer = ({ src }) => {
       <div className="product__images_container">
         <img
           src={src}
-          alt=""
+          alt="course image"
           style={{
-            width: "150px",
-            height: "150px",
+            width: "250px",
+            height: "250px",
             objectFit: "fill",
             border: "dashed 2px var(--Grey300)",
             display: "flex",

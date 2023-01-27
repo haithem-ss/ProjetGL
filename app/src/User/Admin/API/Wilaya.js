@@ -1,4 +1,4 @@
-const wilaya = [
+const wilayas = [
   {
     id: "1",
     code: "1",
@@ -385,4 +385,4 @@ const wilaya = [
   },
 ];
 
-export default wilaya;
+export default wilayas;

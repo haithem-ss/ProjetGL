@@ -20,12 +20,15 @@ const ProductImages = ({ setProductImages }) => {
           name="file"
           types={fileTypes}
           multiple={true}
-          maxSize={4}
           label="Ajouter des images"
           hoverTitle="Glissez et déposez votre image ici"
           onTypeError={(file) => {
             alert("Seuls les fichiers JPG, PNG et GIF sont autorisés");
           }}
+          onMaxSizeError={(file) => {
+            alert("Le fichier est trop volumineux");
+          }}
+          numberOfFiles={4}
         />{" "}
       </div>
       <div className="product__images_wraper">

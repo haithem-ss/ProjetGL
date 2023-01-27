@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'ProjetGL.urls'
@@ -116,14 +116,12 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:5173',
-
-
-)
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-]
+CORS_ORIGIN_ALLOW_ALL = True  # Allow all origins, or set specific origins
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+CORS_ALLOW_HEADERS = ['Content-Type', 'Authorization']
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173',
+                        "http://127.0.0.1:5173"
+                        ]
 USE_I18N = True
 
 USE_TZ = True

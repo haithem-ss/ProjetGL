@@ -17,8 +17,8 @@ import {
   Container,
   Heading,
 } from "@chakra-ui/react";
-import commune from "../Admin/API/commune";
-import wilaya from "../Admin/API/Wilaya";
+import communes from "../Admin/API/commune";
+import wilayas from "../Admin/API/Wilaya";
 import "../styles/AdminProduct.css";
 export const LinksDiv = ({ currentClass }) => {
   return (
@@ -86,31 +86,60 @@ export const LinksDiv = ({ currentClass }) => {
 };
 const ProductPage = () => {
   const navigate = useNavigate();
-  const addProduct = (e) => {
-    e.preventDefault();
-  };
-  const [productName, setProductName] = React.useState("");
-  const [productDescription, setProductDescription] = React.useState("");
+  const [category, setCategory] = React.useState("");
+  const [modalite, setModalite] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [moduleName, setModuleName] = React.useState("");
+  const [wilaya, setWilaya] = React.useState("");
+  const [commune, setCommune] = React.useState({});
+  const [price, setPrice] = React.useState("");
   const [productImages, setProductImages] = React.useState([]);
-  const [productPrice, setProductPrice] = React.useState("");
-  const [productQuantity, setProductQuantity] = React.useState("");
+  const [year, setYear] = React.useState("");
+  // console.log({
+  //   category,
+  //   modalite,
+  //   description,
+  //   moduleName,
+  //   wilaya,
+  //   commune,
+  //   price,
+  //   productImages,
+  // });
+
   const dataSumbit = (e) => {
     e.preventDefault();
     const data = {
-      ProductName: productName,
-      ProductDescription: productDescription,
-      productImages: productImages,
-      ProductPrice: productPrice,
-      ProductStock: productQuantity,
+      category: category,
+      modalite: modalite,
+      description: description,
+      titre: moduleName,
+      tarif: price,
+      lieuFormation: {
+        long: communes[commune].longitude,
+        lat: communes[commune].latitude,
+      },
+      images: productImages,
     };
-    console.log("data", data);
+    console.log(data);
+
+    // axios.post("http://localhost:8000/cours/adresses", data.lieuFormation);
+
+    // axios
+    //   .post("http://localhost:8000/cours/modules", {
+    //     titre: data.titre,
+    //     description: data.description,
+    //   })
+    // axios
+    //   .post("http://localhost:8000/cours/cours",
+
     axios
-      .post("http://localhost:5000/products/addProduct", data)
+      .post("http://localhost:8000/cours/", data)
       .then((res) => {
-        console.log("res", res);
+        console.log(res);
+        console.log(res.data);
       })
       .catch((err) => {
-        console.log("err", err);
+        console.log(err);
       });
   };
 
@@ -125,7 +154,7 @@ const ProductPage = () => {
         justifyContent={"space-between"}
       >
         <LinksDiv currentClass={"Anouncements"} />
-        <Box>
+        <Box className="header_buttons_1">
           <Button
             height={"40px"}
             background={"#DEE2E6"}
@@ -181,6 +210,7 @@ const ProductPage = () => {
               outline: "none",
               border: "none",
             }}
+            type="submit"
           >
             Save
           </Button>
@@ -197,7 +227,12 @@ const ProductPage = () => {
           Course Page
         </button>
         <div className="header_button">
-          <button className="btn-delete">
+          <button
+            className="btn-delete"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
             Delete course <TrashIcon size="small" />
           </button>
         </div>
@@ -220,6 +255,9 @@ const ProductPage = () => {
               name="basic"
               aria-label="default text field"
               placeholder="Course Title"
+              onChange={(e) => {
+                setModuleName(e.target.value);
+              }}
             />
             <h3 className="Product_body_left_title">Course mode</h3>
             <Select
@@ -232,6 +270,9 @@ const ProductPage = () => {
                 { value: "online", label: "online (default)" },
                 { value: "oflline", label: "oflline" },
               ]}
+              onChange={(e) => {
+                setModalite(e.value);
+              }}
             />
             <h3 className="Product_body_left_title">Course Description</h3>
             <TextArea
@@ -239,9 +280,9 @@ const ProductPage = () => {
               name="textarea"
               placeholder="Course Description..."
               resize="none"
-              // onChange={(e) => {
-              //   setProductDescription(e.target.value);
-              // }}
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
             />
           </div>
         </div>
@@ -264,7 +305,7 @@ const ProductPage = () => {
               aria-label="default text field"
               placeholder="Year..."
               onChange={(e) => {
-                setProductPrice(e.target.value);
+                setYear(e.target.value);
               }}
             />
             <h3 className="Product_body_left_title Product_body_righ_header">
@@ -277,9 +318,13 @@ const ProductPage = () => {
               isSearchable
               name="single-select-example"
               options={[
-                { value: "online", label: "online (default)" },
-                { value: "oflline", label: "oflline" },
+                { value: "Primaire", label: "Primaire" },
+                { value: "Collège", label: "Collège" },
+                { value: "Lycée", label: "Lycée" },
               ]}
+              onChange={(e) => {
+                setCategory(e.value);
+              }}
             />
             <h3 className="Product_body_left_title Product_body_righ_header">
               Willaya{" "}
@@ -290,12 +335,15 @@ const ProductPage = () => {
               id="single-select-example"
               isSearchable
               name="single-select-example"
-              options={wilaya.map((wilaya) => {
+              options={wilayas.map((wilaya) => {
                 return {
                   value: wilaya.id,
                   label: wilaya.name,
                 };
               })}
+              onChange={(e) => {
+                setWilaya(e.value);
+              }}
             />
             <h3 className="Product_body_left_title Product_body_righ_header">
               Commune{" "}
@@ -306,12 +354,15 @@ const ProductPage = () => {
               id="single-select-example"
               isSearchable
               name="single-select-example"
-              options={commune.map((commune) => {
+              options={communes.map((commune) => {
                 return {
                   value: commune.id,
                   label: commune.name,
                 };
               })}
+              onChange={(e) => {
+                setCommune(e.value);
+              }}
             />
             <h3 className="Product_body_left_title title_left">Adresse</h3>
             <Textfield
@@ -329,7 +380,7 @@ const ProductPage = () => {
               aria-label="default text field"
               placeholder="Price..."
               onChange={(e) => {
-                setProductPrice(e.target.value);
+                setPrice(e.target.value);
               }}
             />
           </div>
@@ -341,13 +392,74 @@ const ProductPage = () => {
               marginLeft: "15px",
             }}
           >
-            Course Content
+            Course images
           </h3>
           <div className="ProductDescription">
             <ProductImages setProductImages={setProductImages} />
           </div>
         </div>
       </div>
+      <Box className="header_buttons">
+        <Button
+          height={"40px"}
+          background={"#DEE2E6"}
+          color={"#343A40"}
+          width={"150px"}
+          mt={10}
+          mx={5}
+          borderRadius={"0px"}
+          _hover={{
+            background: "#DEE2E6",
+            color: "#343A40",
+            outline: "none",
+            border: "none",
+          }}
+          _active={{
+            background: "#DEE2E6",
+            color: "#343A40",
+            outline: "none",
+            border: "none",
+          }}
+          _focus={{
+            background: "#DEE2E6",
+            color: "#343A40",
+            outline: "none",
+            border: "none",
+          }}
+        >
+          Discard
+        </Button>
+        <Button
+          height={"40px"}
+          backgroundColor={"#00F07D"}
+          color={"black"}
+          width={"150px"}
+          mt={10}
+          mx={5}
+          borderRadius={"0px"}
+          _hover={{
+            backgroundColor: "#00F07D",
+            color: "black",
+            outline: "none",
+            border: "none",
+          }}
+          _active={{
+            backgroundColor: "#00F07D",
+            color: "black",
+            outline: "none",
+            border: "none",
+          }}
+          _focus={{
+            backgroundColor: "#00F07D",
+            color: "black",
+            outline: "none",
+            border: "none",
+          }}
+          type="submit"
+        >
+          Save
+        </Button>
+      </Box>
     </form>
   );
 };

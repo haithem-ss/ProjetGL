@@ -29,6 +29,7 @@ class ModuleViews(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
     # Ajouter un module
 
+    # Path: https://
     def post(self, request, *args, **kwargs):
         data = {
             'nom': request.data.get('nom'),

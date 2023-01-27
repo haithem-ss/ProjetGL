@@ -1,4 +1,4 @@
-const commune = [
+const communes = [
   {
     id: "1",
     post_code: "01001",
@@ -13870,4 +13870,4 @@ const commune = [
   },
 ];
 
-export default commune;
+export default communes;
