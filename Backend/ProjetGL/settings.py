@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Users',
     'favoriteCours',
     'rest_framework',
+    'corsheaders'
 
 ]
 AUTH_USER_MODEL = 'Users.User'
@@ -54,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'ProjetGL.urls'
@@ -113,7 +116,14 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:5173',
 
+
+)
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+]
 USE_I18N = True
 
 USE_TZ = True
