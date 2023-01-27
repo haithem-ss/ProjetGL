@@ -122,20 +122,10 @@ const ProductPage = () => {
     };
     console.log(data);
 
-    // axios.post("http://localhost:8000/cours/adresses", data.lieuFormation);
-
-    // axios
-    //   .post("http://localhost:8000/cours/modules", {
-    //     titre: data.titre,
-    //     description: data.description,
-    //   })
-    // axios
-    //   .post("http://localhost:8000/cours/cours",
-
     axios
-      .post("http://localhost:8000/cours/", data)
+      .post("http://localhost:8000/cours", data)
+
       .then((res) => {
-        console.log(res);
         console.log(res.data);
       })
       .catch((err) => {

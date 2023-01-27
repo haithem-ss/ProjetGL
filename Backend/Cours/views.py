@@ -21,8 +21,9 @@ import re
 
 
 class ModuleViews(APIView):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     # Lister toutes les modules
+
     def get(self, request, *args, **kwargs):
         modules = Module.objects.all()
         serializer = ModuleSerializer(modules, many=True)
@@ -68,8 +69,9 @@ class ModuleViews(APIView):
 
 
 class AdresseViews(APIView):
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
     # lister les adresses
+
     def get(self, request, *args, **kwargs):
         adr = Adresse.objects.all()
         serializer = AdresseSerializer(adr, many=True)
@@ -115,7 +117,7 @@ class AdresseViews(APIView):
 
 
 class CoursViews(APIView):
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.AllowAny]
     # lister les cours
 
     def get(self, request, *args, **kwargs):
