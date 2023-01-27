@@ -18,6 +18,9 @@ import re
 # what you ll learn from this course
 # bio of user
 # keywords
+from rest_framework import generics
+from rest_framework import filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ModuleViews(APIView):
@@ -156,6 +159,9 @@ class CoursViews(APIView):
             return Response("Cours non existant", status=status.HTTP_404_NOT_FOUND)
 
 
+<< << << < HEAD
+
+
 def scrape_data(request):
 
     async def get_page(s, url):
@@ -269,3 +275,24 @@ def download_scraped_data(request):
                 os.path.basename(path)
             return response
     raise Http404
+
+
+== == == =
+
+
+class CoursFilters(generics.ListCreateAPIView):
+    queryset = Cours.objects.all()
+    serializer_class = CoursSerializer
+    name = 'Cours list'
+    filter_backends = [filters.SearchFilter,
+                       DjangoFilterBackend, filters.OrderingFilter]
+
+    filterset_fields = (
+        'modalité',
+        'niveau',
+    )
+    search_fields = ["auteur__nom", "^titre", "description"]
+    ordering_fields = ['date']
+
+
+>>>>>> > upstream/main
