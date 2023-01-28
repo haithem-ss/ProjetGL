@@ -15,7 +15,7 @@ import {
     IconButton,
 } from '@chakra-ui/react'
 import React from 'react'
-import io from 'socket.io-client';
+
 
 const DateMessages = ({ Date }) => {
     return <Text color="#6C757D" fontSize="xs" textAlign="center" >

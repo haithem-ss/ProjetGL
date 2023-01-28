@@ -7,8 +7,6 @@ import "./scroll.css";
 import TOP from "../Landing/Top";
 
 
-
-
 function Navbar() {
 const [isShown, setShown] = useState(false);
   const height=(0.9 * window.innerHeight)
@@ -55,10 +53,8 @@ const [isShown, setShown] = useState(false);
 
           </Flex>
         </Flex>
-        <Flex className="wrapper" display={isShown ? 'flex' : 'none'} w='100vw' h='10vh' bg="#1F1F1F" justifyContent='center' zIndex='20' bgImage={pattern}>  
-        </Flex>
       </Flex>
-      <TOP/>
+      
     </div>
     
   )

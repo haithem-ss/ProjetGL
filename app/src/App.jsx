@@ -16,7 +16,9 @@ function App() {
 
   return (
     <div className="App">
-      <Container maxW="90vw" margin="2rem auto" >
+
+
+      
       <BrowserRouter>
         
         <Routes>
@@ -25,18 +27,7 @@ function App() {
       </Routes>
         </BrowserRouter>
 
-      </Container>
-
-      <Container maxW="90vw" margin="2rem auto" >
-      <BrowserRouter>
-        
-        <Routes>
-        <Route path="/" element={ <HomePage/> } />
-        <Route path="/MyAnouncements" element={ <MyAnouncements/> } />
-      </Routes>
-        </BrowserRouter>
-
-      </Container>
+    
 
     </div>
   )
