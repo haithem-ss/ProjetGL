@@ -18,13 +18,30 @@ export default function SignIn(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-        const response = await axios.post('/api/users/register', UserInfos);
+        const response = await axios.post('http://localhost:8000/users/login', UserInfos);
         const { token } = response.data;
         // Store the token in local storage or use it to authenticate further requests
         } catch (error) {
         console.error(error);
         }
     };
+    const setEmail = e => {
+        setUserInfos(existingValues => ({
+          // Retain the existing values
+          ...existingValues,
+          // update the firstName
+          email: e.target.value,
+        }))
+      }
+    
+      const setPassword = e => {
+        setUserInfos(existingValues => ({
+          // Retain the existing values
+          ...existingValues,
+          // update the lastName
+          password: e.target.value,
+        }))
+      }
 
 
     
@@ -37,11 +54,11 @@ export default function SignIn(){
                     
                     <FormControl>
                         <FormLabel>Email address</FormLabel>
-                        <Input borderRadius='0px' type='email' value={UserInfos.Email} onChange={setUserInfos({...prevs})}/>
+                        <Input borderRadius='0px' type='email' value={UserInfos.Email} onChange={setEmail}/>
                     </FormControl>
                     <FormControl>
                         <FormLabel>Password</FormLabel>
-                        <Input borderRadius='0px' type='password' value={UserInfos.Password} />
+                        <Input borderRadius='0px' type='password' value={UserInfos.Password} onChange={setPassword} />
                     </FormControl>
                     <Flex w='100%' justifyContent='space-between' mt='5'>
                         <Radio value='Sasuke' color='#343A40'>Remember Me </Radio>

@@ -34,30 +34,7 @@ return(
         <Flex flexDirection='column' w='45%' gap='2em'>
             <Text fontSize='4xl' fontFamily='Space Grotesk' fontWeight='700'>Philosophy Course From zero To Advanced</Text>
             <Text fontSize='lg' color='#6C757D ' fontWeight='500' fontFamily='Space Grotesk' >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </Text>
-            <Flex flexWrap='wrap'  gap='1em' border='1px' padding='3'>
-                
-                <Flex w='45%' gap='1em'>
-                    <img src={CheckVector} alt="Check Specs logo" />
-                    <Text>Lorem Ipsum is simply dummy text of the printing and</Text>
-                </Flex>
-
-                <Flex w='45%' gap='1em'>
-                    <img src={CheckVector} alt="Check Specs logo" />
-                    <Text>Lorem Ipsum is simply dummy text of the printing and</Text>
-                </Flex>
-                <Flex w='45%' gap='1em'>
-                    <img src={CheckVector} alt="Check Specs logo" />
-                    <Text>Lorem Ipsum is simply dummy text of the printing and</Text>
-                </Flex>
-                <Flex w='45%' gap='1em'>
-                    <img src={CheckVector} alt="Check Specs logo" />
-                    <Text>Lorem Ipsum is simply dummy text of the printing and</Text>
-                </Flex>
-                <Flex w='45%' gap='1em'>
-                    <img src={CheckVector} alt="Check Specs logo" />
-                    <Text>Lorem Ipsum is simply dummy text of the printing and</Text>
-                </Flex>
-            </Flex>
+            
             <Flex gap='4'>
                 <Badge p='2'color='white' bgColor='#495057;'>Presental</Badge>
                 <Badge p='2'  >Primaire - 1</Badge>

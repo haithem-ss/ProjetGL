@@ -8,46 +8,49 @@ import image from "../../assets/landingBg.png";
 import zeus from "./zeus.svg";
 import axios from "axios";
 import { useState } from "react";
-export default function SignIn(){
-    const [UserInfos, setUserInfos] = useState({
-        firstName: '',
-        lastName: '',
-        password: '',
-        email: '',
-    });
+export default function SignUp(){
 
-    const handleSubmit = async (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-        const response = await axios.post('/api/users/register', UserInfos);
+        const response = await axios.post('http://localhost:8000/users/register', UserInfos);
         const { token } = response.data;
         // Store the token in local storage or use it to authenticate further requests
         } catch (error) {
         console.error(error);
         }
     };
-    const setFirstName = e => {
+    const [UserInfos, setUserInfos] = useState({
+        prenom: '',
+        nom: '',
+        password: '',
+        email: '',
+    });
+
+
+    
+    const setprenom = e => {
         setUserInfos(existingValues => ({
           // Retain the existing values
           ...existingValues,
-          // update the firstName
-          firstName: e.target.value,
+          // update the prenom
+          prenom: e.target.value,
         }))
       }
     
-      const setLastName = e => {
+      const setnom = e => {
         setUserInfos(existingValues => ({
           // Retain the existing values
           ...existingValues,
-          // update the lastName
-          lastName: e.target.value,
+          // update the nom
+          nom: e.target.value,
         }))
       }
       const setEmail = e => {
         setUserInfos(existingValues => ({
           // Retain the existing values
           ...existingValues,
-          // update the firstName
+          // update the prenom
           email: e.target.value,
         }))
       }
@@ -56,7 +59,7 @@ export default function SignIn(){
         setUserInfos(existingValues => ({
           // Retain the existing values
           ...existingValues,
-          // update the lastName
+          // update the nom
           password: e.target.value,
         }))
       }
@@ -68,26 +71,27 @@ export default function SignIn(){
             <Show  above='xl'><Image w={{md:'40%'}} alignSelf='flex-end' src={zeus} order='2' Display={{sm:'none', md:'none'}} maxWidth='fit-content' ></Image></Show>
             <Flex flexDirection='column' w={['90%','md']} mx={{md:'40'}}  my='auto' alignItems='center' gap='10' order='1'>
                 <Image src={logo} w='40'></Image>
-                <Flex flexDirection='column' w={['full','xl']} h={{md:'xl'}} gap='5' justifyContent='center' alignItems='center' bgColor='white' borderRadius='4px' p='10' maxWidth='100%' >
-                    <Text>{JSON.stringify(UserInfos)}</Text>
+                <Text color='white'>{JSON.stringify(UserInfos)}</Text>
+                <Flex flexDirection='column' w={['full','full','xl','xl']} h={{md:'xl'}} gap='3' justifyContent='center' alignItems='center' bgColor='white' borderRadius='4px' p='10' maxWidth='100%' >
+                    
+                    <FormControl>
+                        <FormLabel >First Name</FormLabel>
+                        <Input borderRadius='0px' type='text' value={UserInfos.prenom} onChange={setprenom}/>
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel>Last Name</FormLabel>
+                        <Input borderRadius='0px' type='text' value={UserInfos.nom} onChange={setnom} />
+                    </FormControl>
                     <FormControl>
                         <FormLabel>Email address</FormLabel>
-                        <Input borderRadius='0px' type='email' value={UserInfos.Email} onChange={setEmail}/>
+                        <Input borderRadius='0px' type='email' value={UserInfos.email} onChange={setEmail}/>
                     </FormControl>
                     <FormControl>
                         <FormLabel>Password</FormLabel>
-                        <Input borderRadius='0px' type='password' value={UserInfos.Password} onChange={setPassword} />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Email address</FormLabel>
-                        <Input borderRadius='0px' type='email' value={UserInfos.Email} onChange={setEmail}/>
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Password</FormLabel>
-                        <Input borderRadius='0px' type='password' value={UserInfos.Password} onChange={setPassword} />
+                        <Input borderRadius='0px' type='password' value={UserInfos.password} onChange={setPassword} />
                     </FormControl>
                     
-                    <Button borderRadius='0px' bgColor='#00F07D' width='80%'><Text fontSize='xl' color='black'>Sign In</Text></Button>
+                    <Button borderRadius='0px' bgColor='#00F07D' width='80%' type='submit' onClick={handleSubmit}><Text fontSize='xl' color='black'>Register</Text></Button>
                     <Flex justifyContent='center' gap='4' mt='5'>
                         <Image src={Line} w='20%'></Image>
                         <Text fontSize='md' color='gray.500'> or continue with</Text>
