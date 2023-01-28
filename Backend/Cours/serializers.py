@@ -20,7 +20,7 @@ class CoursSerializer(serializers.ModelSerializer):
     module = ModuleSerializer( read_only=True)
     lieuFormation = AdresseSerializer( read_only=True)
     auteur=UserSerializer( read_only=True)
-    
+    thumbnail = serializers.ImageField(required=True)
     class Meta:
         model = Cours
         fields = "__all__"

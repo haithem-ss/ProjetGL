@@ -38,6 +38,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     prenom=models.CharField(max_length=50)
     nomEtablissement = models.CharField(db_index=True,max_length=50, unique=True,  null=True, blank=True)
     dateInscription=models.DateField(auto_now_add=True)
+    phoneNumber=models.CharField(max_length=15,null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     USERNAME_FIELD = 'email'
