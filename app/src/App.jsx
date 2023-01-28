@@ -4,12 +4,12 @@ import * as React from 'react'
 import './App.css'
 import Top from './Components/Landing/Top'
 import CoursePage from './Components/CourseDetails/CoursePage'
-import SignIn from './Components/Signing/SignIn'
+import SignUp from './Components/Signing/SignUp'
 import Navbar from './Components/Navbar/Navbar'
 
 import './App.css'
-import { BrowserRouter ,Routes, Route} from "react-router-dom";
-import {Container} from '@chakra-ui/react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Container } from '@chakra-ui/react'
 import HomePage from './Pages/HomePage'
 import MyAnouncements from './Pages/MyAnouncements'
 function App() {
@@ -18,16 +18,10 @@ function App() {
     <div className="App">
 
 
-      
-      <BrowserRouter>
-        
-        <Routes>
-        <Route path="/" element={ <HomePage/> } />
-        <Route path="/MyAnouncements" element={ <MyAnouncements/> } />
-      </Routes>
-        </BrowserRouter>
 
-    
+      <HomePage />
+
+
 
     </div>
   )

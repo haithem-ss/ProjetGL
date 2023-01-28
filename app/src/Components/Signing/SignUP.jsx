@@ -10,7 +10,8 @@ import axios from "axios";
 import { useState } from "react";
 export default function SignIn(){
     const [UserInfos, setUserInfos] = useState({
-        username: '',
+        firstName: '',
+        lastName: '',
         password: '',
         email: '',
     });
@@ -25,6 +26,40 @@ export default function SignIn(){
         console.error(error);
         }
     };
+    const setFirstName = e => {
+        setUserInfos(existingValues => ({
+          // Retain the existing values
+          ...existingValues,
+          // update the firstName
+          firstName: e.target.value,
+        }))
+      }
+    
+      const setLastName = e => {
+        setUserInfos(existingValues => ({
+          // Retain the existing values
+          ...existingValues,
+          // update the lastName
+          lastName: e.target.value,
+        }))
+      }
+      const setEmail = e => {
+        setUserInfos(existingValues => ({
+          // Retain the existing values
+          ...existingValues,
+          // update the firstName
+          email: e.target.value,
+        }))
+      }
+    
+      const setPassword = e => {
+        setUserInfos(existingValues => ({
+          // Retain the existing values
+          ...existingValues,
+          // update the lastName
+          password: e.target.value,
+        }))
+      }
 
 
     
@@ -34,19 +69,24 @@ export default function SignIn(){
             <Flex flexDirection='column' w={['90%','md']} mx={{md:'40'}}  my='auto' alignItems='center' gap='10' order='1'>
                 <Image src={logo} w='40'></Image>
                 <Flex flexDirection='column' w={['full','xl']} h={{md:'xl'}} gap='5' justifyContent='center' alignItems='center' bgColor='white' borderRadius='4px' p='10' maxWidth='100%' >
-                    
+                    <Text>{JSON.stringify(UserInfos)}</Text>
                     <FormControl>
                         <FormLabel>Email address</FormLabel>
-                        <Input borderRadius='0px' type='email' value={UserInfos.Email} onChange={setUserInfos({...prevs})}/>
+                        <Input borderRadius='0px' type='email' value={UserInfos.Email} onChange={setEmail}/>
                     </FormControl>
                     <FormControl>
                         <FormLabel>Password</FormLabel>
-                        <Input borderRadius='0px' type='password' value={UserInfos.Password} />
+                        <Input borderRadius='0px' type='password' value={UserInfos.Password} onChange={setPassword} />
                     </FormControl>
-                    <Flex w='100%' justifyContent='space-between' mt='5'>
-                        <Radio value='Sasuke' color='#343A40'>Remember Me </Radio>
-                        <Link fontWeight='500' color='#343A40'>Forgot Password ?</Link>
-                    </Flex>
+                    <FormControl>
+                        <FormLabel>Email address</FormLabel>
+                        <Input borderRadius='0px' type='email' value={UserInfos.Email} onChange={setEmail}/>
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel>Password</FormLabel>
+                        <Input borderRadius='0px' type='password' value={UserInfos.Password} onChange={setPassword} />
+                    </FormControl>
+                    
                     <Button borderRadius='0px' bgColor='#00F07D' width='80%'><Text fontSize='xl' color='black'>Sign In</Text></Button>
                     <Flex justifyContent='center' gap='4' mt='5'>
                         <Image src={Line} w='20%'></Image>

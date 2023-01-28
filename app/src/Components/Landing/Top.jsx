@@ -13,7 +13,7 @@ function TOP() {
         bgSize="80%"
         justifyContent="space-between"
         flexDirection={["column", "column", "row"  ]}
-        mb='200px'
+        mb='10vh'
         position='relative'
         top='10vh'
       >
