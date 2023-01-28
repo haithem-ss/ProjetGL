@@ -31,13 +31,13 @@ const [isShown, setShown] = useState(false);
           <Flex w='90%' justifyContent='space-between' alignItems='center'>
             <Image maxWidth={['15%','15%','10%','8%']} src={logo} max></Image>
             <Flex h='100%' alignItems='Center' display={['none','none','flex','flex']} color='white' >
-              <Divider orientation='vertical'  borderWidth='1px' opacity='1'  display={isShown ? 'flex' : 'none'}   />
+              <Divider transition="all 0.1s ease-in-out" orientation='vertical'  borderWidth='1px' opacity='1' borderColor={isShown ? 'white' : '#1F1F1F'}   />
               <Link padding='6'  _hover={{bgColor:'white' ,color:'black'}} >HOME</Link>
-              <Divider orientation='vertical' borderWidth='1px' opacity='1' display={isShown ? 'flex' : 'none'}  />
+              <Divider transition="all 0.1s ease-in-out" orientation='vertical' borderWidth='1px' opacity='1' borderColor={isShown ? 'white' : '#1F1F1F'}  />
               <Link padding='6'  _hover={{bgColor:'white' ,color:'black'}}>COURSES</Link>
-              <Divider orientation='vertical' borderWidth='1px' opacity='1' display={isShown ? 'flex' : 'none'}  />
+              <Divider transition="all 0.1s ease-in-out" orientation='vertical' borderWidth='1px' opacity='1' borderColor={isShown ? 'white' : '#1F1F1F'} />
               <Link padding='6'  _hover={{bgColor:'white' ,color:'black'}}>ACCOUNT</Link>
-              <Divider orientation='vertical' borderWidth='1px' opacity='1' display={isShown ? 'flex' : 'none'}  />
+              <Divider transition="all 0.1s ease-in-out" orientation='vertical' borderWidth='1px' opacity='1' borderColor={isShown ? 'white' : '#1F1F1F'}  />
             </Flex>
             <IconButton
             bgColor='transparent'
@@ -50,7 +50,6 @@ const [isShown, setShown] = useState(false);
             >
 
             </IconButton>
-
           </Flex>
         </Flex>
       </Flex>
