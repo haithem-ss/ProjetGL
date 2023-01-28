@@ -14,15 +14,14 @@ import {
     MenuOptionGroup,
     IconButton,
 } from '@chakra-ui/react'
-import { ChevronDownIcon } from '@chakra-ui/icons'
 import ChatSection from './ChatSection'
 import React from 'react'
+import UseConversationHistory from "../Hooks/UseConversationHistory"
 
 
-
-const HistoryItem = ({ name, lastMessage,openChat }) => {
+const HistoryItem = ({ name, lastMessage, openChat }) => {
     return <Flex
-    onClick={()=>openChat()}
+        onClick={() => openChat()}
         borderBottom="1px solid #CED4DA"
         padding=" 0.75rem 0rem 0.75rem 0.75rem "
         align="center"
@@ -31,8 +30,8 @@ const HistoryItem = ({ name, lastMessage,openChat }) => {
         cursor="pointer"
     >
         <Flex
-        align="center"
-        gap={3}
+            align="center"
+            gap={3}
         >
             <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
             <Box>
@@ -66,17 +65,15 @@ const HistoryItem = ({ name, lastMessage,openChat }) => {
 }
 
 export default function () {
-    const History = [
-        { contact: "SAIDA Haithem", lastMessage: "How are you ?" },
-        { contact: "ATTAR y bilal", lastMessage: "Can you help me please ?" },
-        { contact: "BENAFIA Djamel", lastMessage: "See you there" },
-    ]
-    const [currentChat, setCurrentChat] = React.useState(null)
+    let userData = JSON.parse(localStorage.getItem('userData'));
 
+    const History = UseConversationHistory(userData)
+    const [currentChat, setCurrentChat] = React.useState(null)
+    
     return <>
         <Flex gap={6} width="100%"
         >
-            <Box width="50%" border="1px" height="79vh" borderColor="#CED4DA" overflowY="scroll"
+            <Box width="50%" border="1px" height="79vh" borderColor="#CED4DA" overflowY={History != null && History.length != 0 ? "scroll" : "hidden"}
                 __css={{
                     '&::-webkit-scrollbar': {
                         w: '2',
@@ -88,17 +85,23 @@ export default function () {
                         bg: `gray.100`,
                     },
                 }}>
-                {
-                    History.map((conversation) => (<HistoryItem 
-                        openChat={()=>{
-                            setCurrentChat(conversation)
-                        }}
-                        name={conversation.contact} 
-                        lastMessage={conversation.lastMessage} />))
-                }
+                {History != null && History.length != 0 ?
+                    <>
+                        {
+                            History.map((conversation) => (<HistoryItem
+                                openChat={() => {
+                                    setCurrentChat(conversation)
+                                }}
+                                name={conversation.user2.nom + '  ' + conversation.user2.prenom}
+                                lastMessage={conversation.lastMessage} />))
+                        }</> : <>
+                        <Heading size="md" height="100%" textAlign="center" marginTop="45%">No messages in your inbox</Heading>
+
+                    </>}
             </Box>
             <Box width="50%" border="1px" height="79vh" borderColor="#CED4DA">
-                <ChatSection currentChat={currentChat} />
+                <ChatSection
+                    currentChat={currentChat} />
             </Box>
         </Flex>
 
