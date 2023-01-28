@@ -7,9 +7,12 @@ import {
 } from '@chakra-ui/react'
 import CardsContainer from '../Components/CardsContainer'
 import Chat from '../Components/Chat'
+import useCours from '../Hooks/UseCours'
 
 
 export default function () {
+    let data = useCours();
+
     return <>
         <Tabs variant='unstyled' padding="0">
             <TabList gap={1}>
@@ -18,7 +21,7 @@ export default function () {
             </TabList>
             <TabPanels padding="0">
                 <TabPanel>
-                    <CardsContainer variant={0} />
+                    <CardsContainer variant={0} data={data} />
                 </TabPanel>
                 <TabPanel>
                     <Chat/>

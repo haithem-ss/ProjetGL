@@ -9,5 +9,6 @@ urlpatterns = [
     path('', home.as_view()),
     path("cours/", include("Cours.urls")),
     path("users/", include("Users.urls")),
-    path("favoriteCours/", include("favoriteCours.urls"))
+    path("favoriteCours/", include("favoriteCours.urls")),
+    path("chat/", include("chat.urls"))
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

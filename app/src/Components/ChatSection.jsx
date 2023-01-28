@@ -15,15 +15,17 @@ import {
     IconButton,
 } from '@chakra-ui/react'
 import React from 'react'
+import UseMessages from '../Hooks/UseMessages'
+import ScrollableFeed from 'react-scrollable-feed'
 
+const DateMessages = ({ dte }) => {
 
-const DateMessages = ({ Date }) => {
-    return <Text color="#6C757D" fontSize="xs" textAlign="center" >
-        {Date}
+    return <Text margin="10px" color="#6C757D" fontSize="xs" textAlign="center" >
+        {dte}
     </Text>
 }
-const MessageBubble = ({ text, sender }) => {
-    return <Flex maxW="70%" direction={sender ? "row-reverse" : "row"} marginLeft={sender ? "30%" : "0"}>
+const MessageBubble = ({ ref ,text, sender }) => {
+    return <Flex  maxW="70%" direction={sender ? "row-reverse" : "row"} margin="5px 0px" marginLeft={sender ? "30%" : "0"}>
         <Avatar name='Dan Abrahmov' margin="0 0.75rem" src='https://bit.ly/dan-abramov' />
         <Text maxW="70%" fontSize="md" fontWeight={500} padding="0.5rem 0.75rem 0.5rem 0.75rem" borderRadius={10} bg={sender ? "#343A40" : "#F8F9FA"} color={sender ? "white" : "#495057"}>
             {text}
@@ -41,7 +43,7 @@ const TopBar = ({ currentChat }) => {
     >
         <Flex align="center" gap={3}>
             <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
-            <Heading size="sm" fontWeight="700">{currentChat.contact}</Heading>
+            <Heading size="sm" fontWeight="700">{currentChat.user2.nom + " "+ currentChat.user2.prenom}</Heading>
         </Flex>
         <Menu>
             <MenuButton
@@ -65,37 +67,41 @@ const TopBar = ({ currentChat }) => {
         </Menu>
     </Flex>
 }
-const MessagesSection = ({ Messages }) => {
+const MessagesSection = ({ NewMessages,currentChat,senderID }) => {
+    let Messages=UseMessages(currentChat)
+    React.useEffect(()=>{
+    },[NewMessages,Messages])
+
     return <Box
+        id="MessagesSection"
         height="100%"
-        padding="0.75rem 0"
-        overflowY="scroll"
+        overflowY="hidden"
         flexDirection="column"
         justifyContent="flex-start"
+        width="100%"
+        paddingLeft="0px"
         gap={6}
         display="flex"
-        __css={{
-            '&::-webkit-scrollbar': {
-                w: '2',
-            },
-            '&::-webkit-scrollbar-track': {
-                w: '6',
-            },
-            '&::-webkit-scrollbar-thumb': {
-                bg: `gray.100`,
-            },
-        }}
+        
     >
-        {Messages.map((item) => (<MessageBubble text={item} sender={true} />))}
-        {/* <DateMessages Date="FRI AT 11:03 AM" />
-        <MessageBubble text="Salam Khoya Ma3lish T3awenni ?" sender={false} />
-        <MessageBubble text="Juste 3la el course hadek li rak hato fel profil
-        ta3k win interassaaani habit n3rf win ra7 yes
-        ra et merci w bon courage." sender={false} />
-        <DateMessages Date="FRI AT 11:03 AM" />
+              <ScrollableFeed >
+                {/* {Messages!=[] ?
+              <DateMessages dte={Date(Messages[0].dateTimeMessage).toDateString()}></DateMessages>
+            :<></>} */}
+        {Messages.map((item) => (
+            <>
+     <DateMessages dte={item.dateTimeMessage}></DateMessages>
+{
+    item.messages.map((mes)=>(
+        <MessageBubble text={mes.message} sender={mes.sender===senderID} />
 
-        <MessageBubble text="Juste 3la el course hadek li rak hato fel profilta3k win interassaaani habit n3rf win ra7 yesra et merci w bon courage." sender={true} />
-        <MessageBubble text="lsl mat9l9hach yaamat w n3ytlk" sender={true} /> */}
+    ))
+}
+        </>)
+        )}
+        {NewMessages.map((item) => (<MessageBubble text={item.message} sender={item.sender===senderID}  />))}
+          </ScrollableFeed>
+
     </Box>
 }
 const BottomBar = ({ NewMessage }) => {
@@ -131,15 +137,15 @@ const BottomBar = ({ NewMessage }) => {
     </Flex >
 }
 
-export default function ({ currentChat }) {
-    const toast = useToast()
+export default function ({currentChat }) {
     const [socket, setSocket] = React.useState(null);
     const [loading,setLoading]=React.useState(false)
+    const [NewMessages,setNewMessages]=React.useState([])
+    let toast=useToast()
     React.useEffect(() => {
         if (currentChat!=null) {
-            console.log("Loading")
             setLoading(true)
-            const socket = new WebSocket('ws://localhost:8000/chat/' + "SAIDABCE" + "/");
+            const socket = new WebSocket('ws://localhost:8000/chat/' + currentChat.id + "/");
             socket.onopen = (e) => {
                 toast({
                     title: 'Connected successfully',
@@ -150,7 +156,7 @@ export default function ({ currentChat }) {
                 })
             }
             socket.onmessage = (event) => {
-                console.log(event.data);
+                setNewMessages(messages => [...messages, JSON.parse(event.data)])
             };
             socket.onclose = (event) => {
                 console.log(event);
@@ -158,18 +164,17 @@ export default function ({ currentChat }) {
             setSocket(socket);
             setTimeout(()=>{
                 setLoading(false)
-            },700)
+
+            },1500)
             // Cleanup function to close the socket when component unmounts
             return () => socket.close();
         }
     }, [currentChat]);
-    const [messages, setMessages] = React.useState([])
     const AddMessage = (message) => {
-        // setMessages(messages => [...messages, message])
         socket.send(JSON.stringify({
             message: message,
-            sender: "SAIDA Haithem",
-            receiver: "BCE KHR"
+            sender: currentChat.user1.id,
+            receiver: currentChat.user2.id
         }));
     }
     return <>
@@ -177,11 +182,11 @@ export default function ({ currentChat }) {
             
             {loading ? <Spinner margin="auto"  color='blue.500' size='xl' thickness='4px' /> :
                        <> {currentChat === null ?
-                            <Heading size="md" height="100%" textAlign="center" marginTop="50%">Please select conversation</Heading>
+                            <Heading size="md" height="100%" textAlign="center" marginTop="45%">Please select conversation</Heading>
                             :
                             <>
                                 <TopBar currentChat={currentChat} />
-                                <MessagesSection Messages={messages} />
+                                <MessagesSection NewMessages={NewMessages} currentChat={currentChat} senderID={currentChat.user1.id} />
                                 <BottomBar NewMessage={AddMessage} />
                             </>
             
