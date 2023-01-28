@@ -71,7 +71,6 @@ export default function SignUp(){
             <Show  above='xl'><Image w={{md:'40%'}} alignSelf='flex-end' src={zeus} order='2' Display={{sm:'none', md:'none'}} maxWidth='fit-content' ></Image></Show>
             <Flex flexDirection='column' w={['90%','md']} mx={{md:'40'}}  my='auto' alignItems='center' gap='10' order='1'>
                 <Image src={logo} w='40'></Image>
-                <Text color='white'>{JSON.stringify(UserInfos)}</Text>
                 <Flex flexDirection='column' w={['full','full','xl','xl']} h={{md:'xl'}} gap='3' justifyContent='center' alignItems='center' bgColor='white' borderRadius='4px' p='10' maxWidth='100%' >
                     
                     <FormControl>
