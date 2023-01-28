@@ -3,8 +3,9 @@ import * as React from 'react'
 
 import './App.css'
 import Top from './Components/Landing/Top'
-// // import CoursePage from './Components/CourseDetails/CoursePage'
-// import SignIn from './Components/Signing/SignIn'
+import CoursePage from './Components/CourseDetails/CoursePage'
+import SignUp from './Components/Signing/SignUP'
+import SignIn from './Components/Signing/SignIn'
 import Navbar from './Components/Navbar/Navbar'
 import NavbarDashboard from "./Components/Dashboard/Navbar"
 import './App.css'
