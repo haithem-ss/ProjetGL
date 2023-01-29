@@ -4,8 +4,9 @@ from rest_framework import status
 from rest_framework import permissions
 from .models import Module, Adresse, Cours
 from .serializers import ModuleSerializer, AdresseSerializer, CoursSerializer
-from django.http import FileResponse, Http404, HttpResponse
-
+from django.http import FileResponse, Http404, HttpResponse, JsonResponse
+import cloudinary
+from cloudinary.uploader import upload
 
 from bs4 import BeautifulSoup
 import asyncio
@@ -137,7 +138,7 @@ class CoursViews(APIView):
     # Ajouter un adresse
 
     def post(self, request, *args, **kwargs):
-        data = request.data
+        data = request.data.copy()
         data["auteur_id"] = request.user.id
         cours = CoursSerializer(data=data)
         if cours.is_valid():
@@ -157,8 +158,8 @@ class CoursViews(APIView):
             cours.tarifPromotion = request.data['tarifPromotion']
             cours.lieuFormation_id = request.data['lieuFormation']
             cours.niveau = request.data['niveau']
-            cours.thumbnail = request.data['thumbnail']
             cours.auteur_id = request.data['auteur']
+            cours.thumnail_url = request.data['thumnail_url']
             cours.save()
             return Response("Cours mise à jour avec succes", status=status.HTTP_202_ACCEPTED)
         except:
@@ -303,3 +304,15 @@ class CoursFilters(generics.ListCreateAPIView):
     )
     search_fields = ["auteur__nom", "^titre", "description"]
     ordering_fields = ['date']
+
+
+class CoursUploader(APIView):
+    def post(self, request, *args, **kwargs):
+        cloudinary.config(
+            cloud_name="dlmx3rkjk",
+            api_key="889174241674913",
+            api_secret="5RDvsRMvl3n4edm2ce_iZtGFUm4"
+        )
+        image = request.data.get('image')
+        image = upload(image, folder="Module")
+        return JsonResponse(image, safe=False)

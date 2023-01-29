@@ -38,13 +38,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         db_index=True, unique=True,  null=False, blank=False)
     nom = models.CharField(max_length=50)
     prenom = models.CharField(max_length=50)
-    nomEtablissement = models.CharField(
-        db_index=True, max_length=50, unique=True,  null=True, blank=True)
+    nomEtablissement = models.CharField(max_length=50, null=True, blank=True)
     dateInscription = models.DateField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     phoneNumber = models.CharField(max_length=50, null=True, blank=True)
     bio = models.CharField(max_length=255, null=True, blank=True)
+    image_url = models.CharField(max_length=255, null=True, blank=True)
+    adresse = models.CharField(max_length=255, null=True, blank=True)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nom', 'prenom']
     objects = UserManager()

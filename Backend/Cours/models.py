@@ -58,8 +58,7 @@ class Cours(models.Model):
     lieuFormation = models.ForeignKey(
         Adresse, on_delete=models.PROTECT, null=True)
     module = models.ForeignKey(Module, on_delete=models.PROTECT, null=True)
-    # thumbnail = models.ImageField(upload_to=upload_to, blank=True, null=True)
-
+    thumnail_url = models.CharField(max_length=255, null=True, blank=True)
     auteur = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     # contact
 
