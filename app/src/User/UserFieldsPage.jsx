@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   Stack,
   Box,
@@ -10,6 +11,8 @@ import {
   Textarea as ChakraTextarea,
 } from "@chakra-ui/react";
 import Vector from "./assets/Vector.png";
+import axios from "axios";
+import "../User/styles/general.css";
 export const LinksDiv = ({ currentClass }) => {
   return (
     <Stack
@@ -76,6 +79,30 @@ export const LinksDiv = ({ currentClass }) => {
 };
 
 const ImageDiv = () => {
+  const [file, setFile] = useState("");
+  const [image, setImage] = useState("");
+
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    console.log(files);
+    const data = new FormData();
+    data.append("image", files[0]);
+
+    const res = await axios
+      .post("http://localhost:8000/users/upload/", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setImage(res.data.secure_url);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <Box
       display={"flex"}
@@ -95,9 +122,20 @@ const ImageDiv = () => {
           height={"150px"}
           borderRadius={"50%"}
           name="Segun Adebayo"
-          src="https://bit.ly/sage-adebayo"
+          src={image}
         />{" "}
       </WrapItem>
+      <input
+        type="file"
+        id="file"
+        accept="image/*"
+        value={file}
+        onChange={(e) => {
+          setFile(e.target.value);
+          uploadImage(e);
+        }}
+      />
+
       <Button
         height={"30px"}
         width={"160px"}
@@ -127,6 +165,7 @@ const ImageDiv = () => {
           style={{
             marginRight: "5px",
           }}
+          onClick={uploadImage}
         />
         Change Picture
       </Button>
@@ -134,7 +173,16 @@ const ImageDiv = () => {
   );
 };
 
-const UserSuppFields = () => {
+const UserSuppFields = ({ setPhoneNum, setAddressAdr, setBiobio }) => {
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [bio, setBio] = useState("");
+  useEffect(() => {
+    setPhoneNum(phone);
+    setAddressAdr(address);
+    setBiobio(bio);
+  }, [phone, address, bio]);
+
   return (
     <Box display={"flex"} flexDirection={"column"} marginTop={4}>
       <Text
@@ -152,6 +200,8 @@ const UserSuppFields = () => {
         height={"30px"}
         fontSize={"0.75rem"}
         marginTop={2}
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
       />
       <Text
         fontSize={"1.25rem"}
@@ -168,6 +218,8 @@ const UserSuppFields = () => {
         height={"30px"}
         fontSize={"0.75rem"}
         marginTop={2}
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
       />
       <Text
         fontSize={"1.25rem"}
@@ -185,12 +237,22 @@ const UserSuppFields = () => {
         fontSize={"0.75rem"}
         marginTop={2}
         resize={"none"}
+        value={bio}
+        onChange={(e) => setBio(e.target.value)}
       />
     </Box>
   );
 };
 
-const UserField = () => {
+const UserField = ({ setFirstNamefirst, setLastNamelast }) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+
+  useEffect(() => {
+    setFirstNamefirst(firstName);
+    setLastNamelast(lastName);
+  }, [firstName, lastName]);
+
   return (
     <Box display={"flex"} flexDirection={"column"} mt={50}>
       <Text
@@ -207,6 +269,8 @@ const UserField = () => {
         height={"30px"}
         fontSize={"0.75rem"}
         marginTop={2}
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
       />
       <Text
         fontSize={"1.25rem"}
@@ -223,12 +287,41 @@ const UserField = () => {
         height={"30px"}
         fontSize={"0.75rem"}
         marginTop={2}
+        value={lastName}
+        onChange={(e) => setLastName(e.target.value)}
       />
     </Box>
   );
 };
 
 const UserFieldsPage = () => {
+  const [firstNamefirst, setFirstNamefirst] = useState("");
+  const [lastNamelast, setLastNamelast] = useState("");
+  const [phoneNum, setPhoneNum] = useState("");
+  const [addressAdr, setAddressAdr] = useState("");
+  const [biobio, setBiobio] = useState("");
+
+  useEffect(() => {
+    console.log(firstNamefirst, lastNamelast, phoneNum, addressAdr, biobio);
+  }, [firstNamefirst, lastNamelast, phoneNum, addressAdr, biobio]);
+
+  const dataSumbit = (e) => {
+    e.preventDefault();
+    const data = `email=b@b.dz&nom=${firstNamefirst}&prenom=${lastNamelast}&nomEtablissement=kablianh&id=2&password=pbkdf2_sha256$390000$Got3TTWXIKLLqmSwJSbmqy$IwWM9uBzO0ta1vv7DMaSimccrEr+KEnz3tNi1KZ2urE=`;
+    axios
+      .put("http://localhost:8000/users/edit", data, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      })
+
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <Box
       display={"flex"}
@@ -250,12 +343,48 @@ const UserFieldsPage = () => {
       >
         <Stack className="left" direction="column" spacing={4} marginTop={10}>
           <ImageDiv />
-          <UserField />
+          <UserField
+            setFirstNamefirst={setFirstNamefirst}
+            setLastNamelast={setLastNamelast}
+          />
         </Stack>
         <Stack className="right" direction="column" spacing={4} marginTop={10}>
-          <UserSuppFields />
+          <UserSuppFields
+            setPhoneNum={setPhoneNum}
+            setAddressAdr={setAddressAdr}
+            setBiobio={setBiobio}
+          />
         </Stack>
       </Box>
+      <Button
+        height={"40px"}
+        backgroundColor={"#00F07D"}
+        color={"black"}
+        width={"200px"}
+        mt={20}
+        borderRadius={"0px"}
+        _hover={{
+          backgroundColor: "#00F07D",
+          color: "black",
+          outline: "none",
+          border: "none",
+        }}
+        _active={{
+          backgroundColor: "#00F07D",
+          color: "black",
+          outline: "none",
+          border: "none",
+        }}
+        _focus={{
+          backgroundColor: "#00F07D",
+          color: "black",
+          outline: "none",
+          border: "none",
+        }}
+        onClick={dataSumbit}
+      >
+        Save
+      </Button>
     </Box>
   );
 };

@@ -16,6 +16,7 @@
     "@atlaskit/select": "^16.1.0",
     "@atlaskit/textarea": "^4.5.4",
     "@atlaskit/textfield": "^5.3.4",
+    "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/react": "^2.4.9",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^10.3.0",
@@ -33,11 +34,11 @@
     "react-google-maps": "^9.4.5",
     "react-leaflet": "^4.2.0",
     "react-router-dom": "^6.7.0",
-    "typescript": "^4.9.4",
-    "use-places-autocomplete": "^4.0.0",
-    "@chakra-ui/icons": "^2.0.17",
+    "react-toastify": "^9.1.1",
     "socket.io-client": "^4.5.4",
-    "swiper": "^8.4.6"
+    "swiper": "^8.4.6",
+    "typescript": "^4.9.4",
+    "use-places-autocomplete": "^4.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

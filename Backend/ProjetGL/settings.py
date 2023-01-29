@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import os
+import cloudinary_storage
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,7 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "daphne",    'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -42,9 +43,13 @@ INSTALLED_APPS = [
     'Users',
     'favoriteCours',
     'rest_framework',
-    "chat", "channels",
+    # "chat",
+    "channels",
     "corsheaders",
     'django_filters',
+    'cloudinary',
+    'cloudinary_storage',
+
 
 
 
@@ -98,8 +103,14 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dlmx3rkjk',
+    'CLOUD_API_KEY': '889174241674913',
+    'CLOUDINARY_API_SECRET': '5RDvsRMvl3n4edm2ce_iZtGFUm4',
+}
 
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

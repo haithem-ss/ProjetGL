@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ArrowLeftIcon from "@atlaskit/icon/glyph/arrow-left";
 import TrashIcon from "@atlaskit/icon/glyph/trash";
 import ProductImages from "./Assets/ProductImages";
@@ -26,8 +26,10 @@ export const LinksDiv = ({ currentClass }) => {
       marginTop={10}
       display={"flex"}
       flexDirection={"row"}
-      alignItems={"baseline"}
-      justifyContent={"center"}
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+      }}
       gap={20}
     >
       <Link
@@ -38,8 +40,10 @@ export const LinksDiv = ({ currentClass }) => {
         background={currentClass === "Anouncements" ? "#343A40" : "#F8F9FA"}
         color={currentClass === "Anouncements" ? "white" : "black"}
         display={"flex"}
-        alignItems={"center"}
-        justifyContent={"center"}
+        style={{
+          alignItems: "center",
+          justifyContent: "center",
+        }}
         _hover={{
           background: currentClass === "Anouncements" ? "#343A40" : "#F8F9FA",
           color: currentClass === "Anouncements" ? "white" : "black",
@@ -61,8 +65,10 @@ export const LinksDiv = ({ currentClass }) => {
         height={"40px"}
         href="/user/security"
         display={"flex"}
-        alignItems={"center"}
-        justifyContent={"center"}
+        style={{
+          alignItems: "center",
+          justifyContent: "center",
+        }}
         background={currentClass === "Messages" ? "#343A40" : "#F8F9FA"}
         color={currentClass === "Messages" ? "white" : "black"}
         _hover={{
@@ -94,36 +100,127 @@ const ProductPage = () => {
   const [commune, setCommune] = React.useState({});
   const [price, setPrice] = React.useState("");
   const [productImages, setProductImages] = React.useState([]);
-  const [year, setYear] = React.useState("");
-  // console.log({
-  //   category,
-  //   modalite,
-  //   description,
-  //   moduleName,
-  //   wilaya,
-  //   commune,
-  //   price,
-  //   productImages,
-  // });
+  const [module, setModule] = React.useState("");
+  const [lieu, setLieu] = React.useState("");
+  const [tarifPromotion, setTarifPromotion] = React.useState("");
+  const [adresse, setAdresse] = React.useState("");
+  const [modules, setModules] = React.useState([]);
+  const [adresses, setAdresses] = React.useState([]);
+  const getModules = async (e) => {
+    e.preventDefault();
+    await axios
+      .get("http://localhost:8000/cours/modules")
+      .then((res) => {
+        console.log(res.data);
+        setModules(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const getAdresses = async (e) => {
+    e.preventDefault();
+    await axios
+      .get("http://localhost:8000/cours/adresses")
+      .then((res) => {
+        console.log(res.data);
+        setAdresses(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-  const dataSumbit = (e) => {
+  const CreateModule = async (e) => {
     e.preventDefault();
     const data = {
-      category: category,
-      modalite: modalite,
+      nom: moduleName,
       description: description,
-      titre: moduleName,
-      tarif: price,
-      lieuFormation: {
-        long: communes[commune].longitude,
-        lat: communes[commune].latitude,
-      },
-      images: productImages,
+      image_url: null,
     };
-    console.log(data);
+    await axios
+      .post("http://localhost:8000/cours/modules", JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setModule(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const CreateLieu = async (e) => {
+    e.preventDefault();
+    const data = {
+      wilaya: wilaya,
+      commune: commune,
+      adresse: adresse,
+      longitude: communes[commune - 1].longitude,
+      latitiude: communes[commune - 1].latitude,
+    };
+    await axios
+      .post("http://localhost:8000/cours/adresses", JSON.stringify(data), {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setLieu(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const dataSumbit = async (e) => {
+    e.preventDefault();
+    await getModules(e)
+      .then(async (res) => {
+        if (
+          modules.filter((module) => module.nom === moduleName).length === 0
+        ) {
+          await CreateModule(e);
+        } else {
+          setModule(modules.filter((module) => module.nom === moduleName)[0]);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    await getAdresses(e)
+      .then(async (res) => {
+        if (adresses.filter((adresse) => adresse === adresse.id).length === 0) {
+          await CreateLieu(e);
+        } else {
+          setLieu(adresses.filter((adresse) => adresse === adresse.id)[0]);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    const formData = new FormData();
+    formData.append("module", module.id);
+    formData.append("lieuFormation", lieu.id);
+    formData.append("niveau", category);
+    formData.append("modalité", modalite);
+    formData.append("description", description);
+    formData.append("titre", "your way to learn " + moduleName);
+    formData.append("tarif", price);
+    formData.append("thumbnail", null);
+    formData.append("tarifPromotion", tarifPromotion);
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    };
 
     axios
-      .post("http://localhost:8000/cours", data)
+      .post("http://127.0.0.1:8000/cours/", formData, config)
 
       .then((res) => {
         console.log(res.data);
@@ -139,9 +236,11 @@ const ProductPage = () => {
         width={"70%"}
         height={"60px"}
         display={"flex"}
-        alignItems={"center"}
+        style={{
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
         margin={"20px auto"}
-        justifyContent={"space-between"}
       >
         <LinksDiv currentClass={"Anouncements"} />
         <Box className="header_buttons_1">
@@ -220,8 +319,10 @@ const ProductPage = () => {
           <button
             className="btn-delete"
             display="flex"
-            alignItems="center"
-            justifyContent="center"
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
             Delete course <TrashIcon size="small" />
           </button>
@@ -257,8 +358,8 @@ const ProductPage = () => {
               isSearchable
               name="single-select-example"
               options={[
-                { value: "online", label: "online (default)" },
-                { value: "oflline", label: "oflline" },
+                { value: "Online", label: "online (default)" },
+                { value: "Presental", label: "Presental" },
               ]}
               onChange={(e) => {
                 setModalite(e.value);
@@ -309,8 +410,10 @@ const ProductPage = () => {
               name="single-select-example"
               options={[
                 { value: "Primaire", label: "Primaire" },
-                { value: "Collège", label: "Collège" },
+                { value: "College", label: "Collège" },
                 { value: "Lycée", label: "Lycée" },
+                { value: "Université", label: "Université" },
+                { value: "Autre", label: "Autre" },
               ]}
               onChange={(e) => {
                 setCategory(e.value);
@@ -360,6 +463,9 @@ const ProductPage = () => {
               name="basic"
               aria-label="default text field"
               placeholder="Adresse..."
+              onChange={(e) => {
+                setAdresse(e.target.value);
+              }}
             />
             <h3 className="Product_body_left_title Product_body_righ_header">
               Price
@@ -371,6 +477,18 @@ const ProductPage = () => {
               placeholder="Price..."
               onChange={(e) => {
                 setPrice(e.target.value);
+              }}
+            />
+            <h3 className="Product_body_left_title Product_body_righ_header">
+              Price Promotion
+            </h3>
+            <Textfield
+              type="number"
+              name="basic"
+              aria-label="default text field"
+              placeholder="Price..."
+              onChange={(e) => {
+                setTarifPromotion(e.target.value);
               }}
             />
           </div>

@@ -11,15 +11,11 @@
   --Grey500: #6c757d;
   --Grey700: #343a40;
 }
-.Product__Wraper {
-  width: 100vw;
-}
 .Product_header {
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 70%;
   margin: 20px auto;
   background-color: var(--lightWhite);
 }
@@ -65,7 +61,6 @@
 }
 .Product_body {
   padding: 20px;
-  width: 70%;
   margin: auto;
   background-color: var(--lightWhite);
   margin-top: 5px;
@@ -324,4 +319,9 @@ label {
   grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 3;
+}
+
+.css-wuhn5s {
+  width: 100% !important;
+  margin: 0px auto !important;
 }

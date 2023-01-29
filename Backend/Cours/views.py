@@ -85,7 +85,11 @@ class AdresseViews(APIView):
         data = {
             'latitiude': request.data.get('latitiude'),
             'longitude': request.data.get('longitude'),
+            'adresse': request.data.get('adresse'),
+            'commune': request.data.get('commune'),
+            'wilaya': request.data.get('wilaya'),
         }
+
         adr = AdresseSerializer(data=data)
         if adr.is_valid():
             adr.save()
@@ -98,6 +102,7 @@ class AdresseViews(APIView):
             'id': request.data.get("id"),
             'latitiude': request.data.get('latitiude'),
             'longitude': request.data.get('longitude'),
+
         }
         adr = Adresse.objects.get(id=data['id'])
         try:
@@ -130,9 +135,8 @@ class CoursViews(APIView):
     # Ajouter un adresse
 
     def post(self, request, *args, **kwargs):
-        data = request.data.dict()
-        data["auteur"] = request.user.id
-        print(data)
+        data = request.data
+        data["auteur_id"] = request.user.id
         cours = CoursSerializer(data=data)
         if cours.is_valid():
             cours.save()
@@ -140,13 +144,23 @@ class CoursViews(APIView):
         return Response(cours.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, *args, **kwargs):
-        cours = Cours.objects.get(id=request.data['id'])
+        id = request.data.get("id")
+        cours = Cours.objects.get(id=id)
         try:
+            cours.module_id = request.data['module']
+            cours.modalité = request.data['modalité']
+            cours.description = request.data['description']
+            cours.titre = request.data['titre']
+            cours.tarif = request.data['tarif']
+            cours.tarifPromotion = request.data['tarifPromotion']
+            cours.lieuFormation_id = request.data['lieuFormation']
+            cours.niveau = request.data['niveau']
+            cours.thumbnail = request.data['thumbnail']
+            cours.auteur_id = request.data['auteur']
             cours.save()
-            return Response("Adresse mise à jour avec succes", status=status.HTTP_202_ACCEPTED)
+            return Response("Cours mise à jour avec succes", status=status.HTTP_202_ACCEPTED)
         except:
-
-            return Response("Adresse non existant", status=status.HTTP_400_BAD_REQUEST)
+            return Response("Cours non existant", status=status.HTTP_400_BAD_REQUEST)
     # Supprimer un cours
 
     def delete(self, request, *args, **kwargs):
@@ -157,9 +171,6 @@ class CoursViews(APIView):
             return Response("Suppression avec succes", status=status.HTTP_202_ACCEPTED)
         except:
             return Response("Cours non existant", status=status.HTTP_404_NOT_FOUND)
-
-
-<< << << < HEAD
 
 
 def scrape_data(request):
@@ -277,9 +288,6 @@ def download_scraped_data(request):
     raise Http404
 
 
-== == == =
-
-
 class CoursFilters(generics.ListCreateAPIView):
     queryset = Cours.objects.all()
     serializer_class = CoursSerializer
@@ -293,6 +301,3 @@ class CoursFilters(generics.ListCreateAPIView):
     )
     search_fields = ["auteur__nom", "^titre", "description"]
     ordering_fields = ['date']
-
-
->>>>>> > upstream/main

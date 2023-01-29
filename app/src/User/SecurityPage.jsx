@@ -37,7 +37,7 @@ const SecurityPage = () => {
           color={"#495057"}
           textTransform={"capitalize"}
           fontWeight={500}
-          marginTop={4}
+          marginTop={20}
           marginLeft={50}
         >
           Password Settings{" "}
@@ -74,9 +74,9 @@ const SecurityPage = () => {
                 placeholder="Password..."
                 width={"300px"}
                 height={"30px"}
-                fontSize={"0.75rem"}
                 marginTop={10}
                 type={"password"}
+                fontSize={"0.875rem"}
               />
             </Box>
             <Box
@@ -98,16 +98,16 @@ const SecurityPage = () => {
                 placeholder="New Password..."
                 width={"300px"}
                 height={"30px"}
-                fontSize={"0.75rem"}
                 marginTop={10}
                 type={"password"}
+                fontSize={"0.875rem"}
               />
               <Text
                 fontSize={"1.25rem"}
                 color={"#495057"}
                 textTransform={"capitalize"}
                 fontWeight={500}
-                marginTop={4}
+                marginTop={10}
               >
                 Confirm new password
               </Text>
@@ -115,9 +115,9 @@ const SecurityPage = () => {
                 placeholder="Password..."
                 width={"300px"}
                 height={"30px"}
-                fontSize={"0.75rem"}
                 marginTop={10}
                 type={"password"}
+                fontSize={"0.875rem"}
               />
             </Box>
           </Box>

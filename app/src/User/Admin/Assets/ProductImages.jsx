@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import ImageContainer from "./ImageContainer";
 import ImageOutline from "./ImageOutline";
 import MediaServicesScaleLargeIcon from "@atlaskit/icon/glyph/media-services/scale-large";
+import axios from "axios";
 const fileTypes = ["JPG", "PNG", "GIF"];
 
 const ProductImages = ({ setProductImages }) => {
@@ -10,8 +11,9 @@ const ProductImages = ({ setProductImages }) => {
   const handleChange = (files) => {
     console.log(Object.values(files));
     setImgURL(Object.values(files).map((file) => URL.createObjectURL(file)));
+    setProductImages(Object.values(files));
   };
-  setProductImages(imgURL);
+
   return (
     <div className="ProductDescription">
       <div className="product__images_wraper__Header">
