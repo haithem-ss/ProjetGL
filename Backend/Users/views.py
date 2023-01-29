@@ -7,6 +7,12 @@ import cloudinary
 from cloudinary.uploader import upload
 from django.http import JsonResponse
 
+from .serializers import MyTokenObtainPairSerializer
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+)
+
 
 class UserRegistration(APIView):
 
@@ -41,3 +47,14 @@ class Upload(APIView):
         image = request.data['image']
         image = upload(image, folder="Users/ProfilePictures/")
         return JsonResponse(image, safe=False)
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+
+class UserViews(APIView):
+    def get(self, request, *args, **kwargs):
+        users = User.objects.all()
+        serielizedData = UserSerializer(users, many=True)
+        return Response(serielizedData.data, status=status.HTTP_201_CREATED)

@@ -21,6 +21,7 @@ import re
 from rest_framework import generics
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class ModuleViews(APIView):
@@ -125,8 +126,9 @@ class AdresseViews(APIView):
 
 
 class CoursViews(APIView):
-    permission_classes = [permissions.AllowAny]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     # lister les cours
+    parser_classes = [MultiPartParser, FormParser]
 
     def get(self, request, *args, **kwargs):
         cours = Cours.objects.all()

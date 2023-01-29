@@ -7,7 +7,7 @@ application = ProtocolTypeRouter({
     'http': get_asgi_application(),
     'websocket': URLRouter(
         [
-            path(r'chat/<str:room_name>/', ChatConsumer.as_asgi()),
+            path(r'chat/<str:group_id>/', ChatConsumer.as_asgi()),
         ]
     ),
 })

@@ -6,6 +6,7 @@ import {
     Flex,
     Text,
     Spinner,
+    Container
 } from '@chakra-ui/react'
 import React from "react"
 import AnnonceCard from './AnnonceCard'
@@ -22,6 +23,8 @@ export default function ({ title, buttonVariant, data }) {
         }, 1000)
     }, [data])
     return < >
+          <Container maxW="90vw" margin="2rem auto" >
+
         <Heading fontSize="2xl" >
             {title}
         </Heading>
@@ -69,6 +72,7 @@ export default function ({ title, buttonVariant, data }) {
             </Center> : null}
         </> : null}
 
+        </Container>
 
 
     </>
