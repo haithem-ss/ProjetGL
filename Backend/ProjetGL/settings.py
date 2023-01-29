@@ -48,7 +48,6 @@ INSTALLED_APPS = [
 
 
 
-
 ]
 AUTH_USER_MODEL = 'Users.User'
 
@@ -82,10 +81,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'ProjetGL.wsgi.application'
 

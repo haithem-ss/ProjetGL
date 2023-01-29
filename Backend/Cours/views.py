@@ -104,9 +104,9 @@ class AdresseViews(APIView):
 
 
 class CoursViews(APIView):
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.AllowAny]
     # lister les cours
-    parser_classes = [MultiPartParser, FormParser]
+    # parser_classes = [MultiPartParser, FormParser]
 
     def get(self, request, *args, **kwargs):
         cours = Cours.objects.all()
@@ -127,11 +127,20 @@ class CoursViews(APIView):
     def put(self, request, *args, **kwargs):
         cours = Cours.objects.get(id=request.data['id'])
         try:
+            cours.module_id=request.data['module']
+            cours.modalité=request.data['modalité']
+            cours.description=request.data['description']
+            cours.titre=request.data['titre']
+            cours.tarif=request.data['tarif']
+            cours.tarifPromotion=request.data['tarifPromotion']
+            cours.lieuFormation_id=request.data['lieuFormation']
+            cours.niveau=request.data['niveau']
+            cours.thumbnail=request.data['thumbnail']
+            cours.auteur_id=request.data['auteur']
             cours.save()
-            return Response("Adresse mise à jour avec succes", status=status.HTTP_202_ACCEPTED)
+            return Response("Cours mise à jour avec succes", status=status.HTTP_202_ACCEPTED)
         except:
-
-            return Response("Adresse non existant", status=status.HTTP_400_BAD_REQUEST)
+            return Response("Cours non existant", status=status.HTTP_400_BAD_REQUEST)
     # Supprimer un cours
 
     def delete(self, request, *args, **kwargs):
