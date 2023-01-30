@@ -2,6 +2,8 @@ import image from "../../assets/landingBg.png";
 import image2 from "../../assets/3amod1.png";
 import image3 from "../../assets/3amod2.svg";
 import { Text, Flex, Image, Button,Show} from "@chakra-ui/react";
+import {ArrowForwardIcon} from "@chakra-ui/icons";
+
 function TOP() {
   return (
       <Flex
@@ -74,8 +76,10 @@ function TOP() {
             backgroundColor="#FFF84B"
             color="black"
             colorScheme="teal"
+            display='flex'
+            gap='2'
           >
-            Discover Now
+            <Text>Discover Now </Text><ArrowForwardIcon/>
           </Button>
         </Flex>
         <Show  above='md'>

@@ -20,9 +20,10 @@ import FirstComponent from "./profil enseignant/FirstComponent"
 function App() {
   return (
     <div className="App">
+
+
       <BrowserRouter>
-        {/* <Navbar/> */}
-        {/* <NavbarDashboard/> */}
+
 
           <Routes>
             <Route path="/" element={<><HomePage /></>} />
@@ -38,35 +39,11 @@ function App() {
             <Route path="/Dashboard/Courses" element={<Dashboard_courses></Dashboard_courses>} />
           </Routes>
 
+        </BrowserRouter>
+
+      
 
 
-        {/* <NavbarDashboard />
-
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Top></Top>
-                <HomePage />
-              </>
-            }
-          />
-          <Route path="/MyAnouncements" element={<MyAnouncements />} />
-        </Routes>
-        <Routes>
-          <Route path="/Dashboard" element={<Dashboard></Dashboard>} />
-          <Route
-            path="/Dashboard/Users"
-            element={<Dashboard_users></Dashboard_users>}
-          />
-          <Route
-            path="/Dashboard/Courses"
-            element={<Dashboard_courses></Dashboard_courses>}
-          />
-        </Routes> */}
-
-      </BrowserRouter>
 
     </div>
   );

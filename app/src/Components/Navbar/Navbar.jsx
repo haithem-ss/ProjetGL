@@ -8,7 +8,7 @@ import {
   MenuItemOption,
   MenuGroup,
   MenuOptionGroup,
-  MenuDivider,
+  MenuDivider, border,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import logo from "./Logo.svg";
@@ -24,18 +24,27 @@ function Navbar() {
     localStorage.removeItem("userData")
     location.reload()
   }
-  const navigate = useNavigate();
 
   const isStaff = JSON.parse(localStorage.getItem("userData"))?.staff === true
   const isLoggedIn = JSON.parse(localStorage.getItem("userData")) != null
   console.log(isLoggedIn)
   const [isShown, setShown] = useState(false);
+const [IsToggeled, setIsToggeled] = useState(false);
+
   const height = (0.9 * window.innerHeight)
   const handleScroll = () => {
     if (window.pageYOffset > height) {
       setShown(true);
     } else {
       setShown(false);
+    }
+  };
+  const handleMenuClick=()=>{
+    if (IsToggeled==true) {
+      setIsToggeled(false)
+    }
+    else{
+      setIsToggeled(true)
     }
   };
 
@@ -46,9 +55,9 @@ function Navbar() {
     };
   }, []);
   return (
-    <div>
-      <Flex flexDirection='column' position='fixed' zIndex='20' >
-        <Flex w='100vw' h='10vh' bg="#1F1F1F" justifyContent='center' >
+    <div >
+      <Flex flexDirection='column' position='fixed' zIndex='20' alignItems='center'>
+        <Flex w='100vw' h='10vh' bg={IsToggeled ? '#282828' :"#1F1F1F"} justifyContent='center' >
           <Flex w='90%' justifyContent='space-between' alignItems='center'>
             <Image maxWidth={['15%', '15%', '10%', '8%']} src={logo} max></Image>
             <Flex h='100%' alignItems='Center' display={['none', 'none', 'flex', 'flex']} color='white' >
@@ -87,22 +96,30 @@ function Navbar() {
 
               <Divider transition="all 0.1s ease-in-out" orientation='vertical' borderWidth='1px' opacity='1' borderColor={isShown ? 'white' : '#1F1F1F'} />
             </Flex>
+
             <IconButton
               bgColor='transparent'
               padding='4'
               color='white'
-              _hover={{ bgColor: 'white', color: 'black' }}
+              _hover={{ bgColor: "#252525", color: 'black', border:'none' }}
               fontSize='2xl'
               icon={<HamburgerIcon />}
               display={['flex', 'flex', 'none', 'none']}
+            onClick={handleMenuClick}
             >
-
+            
             </IconButton>
           </Flex>
+          
+        </Flex>
+        <Flex className="NavSlide"  display={IsToggeled ? 'flex' :'none'} gap='5' fontSize='2xl' alignItems='center' justifyContent='center' flexDirection='column'bg="#1F1F1F"  w='100vw' h='40vh'>
+          <Link _hover={{'color':"#555353"}} color='white'>HOME</Link>
+          <Link _hover={{'color':"#555353"}} color='white'>COURSES</Link>
+          <Link _hover={{'color':"#555353"}} color='white'>ACCOUNT</Link>
         </Flex>
       </Flex>
 
-    </div>
+    </div >
 
   )
 }

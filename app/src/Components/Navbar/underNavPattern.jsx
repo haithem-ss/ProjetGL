@@ -10,11 +10,11 @@ function UnderNavbar() {
 const [isShown, setShown] = useState(true);
   const height=(0.9 * window.innerHeight)
   const handleScroll = () => {
-    // if (window.pageYOffset > height) {
-    //   setShown(true);
-    // } else {
-    //   setShown(false);
-    // }
+     if (window.pageYOffset > height) {
+       setShown(true);
+     } else {
+       setShown(false);
+     }
   };
 
   React.useEffect(() => {
