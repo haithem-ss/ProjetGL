@@ -15,9 +15,10 @@ import useCours from '../Hooks/UseCours'
 import Navbar from "../Components/Navbar/Navbar"
 import UseAuteurCourses from '../Hooks/UseAuteurCourses'
 import Footer from "../profil enseignant/Footer"
-
+import { useNavigate } from 'react-router-dom'
 export default function () {
     const userId = JSON.parse(localStorage.getItem("userData")).id
+    let navigate=useNavigate()
     let data = UseAuteurCourses(userId);
     return <>
         <Navbar />
@@ -42,6 +43,8 @@ export default function () {
                         _active={{
                             outline: "none"
                         }}
+                        onClick={()=>{navigate("/user/cours")}}
+
                     >
                         New Anouncement </Button>
                 </Flex>

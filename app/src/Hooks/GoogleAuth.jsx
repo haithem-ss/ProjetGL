@@ -23,7 +23,7 @@ function GoogleAuth() {
     const onSuccess = (res) => {
         console.log(res)
         setProfile(null);
-        navigate("/")
+        if (res.data!=null ) navigate("/")
 
     };
 

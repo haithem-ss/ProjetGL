@@ -6,7 +6,7 @@ import {
     Tag,
 } from '@chakra-ui/react'
 import { useNavigate } from "react-router-dom";
-
+import NoImage from "../assets/NOimage.png"
 
 export default function ({infos}) {
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function ({infos}) {
         <Box userSelect="none" display="flex" flexDirection="column" gap={2} minW={200} maxW={350} textAlign="left">
            
            {infos.thumnail_url===null ? <Image
-                src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'/>
+                src={NoImage}/>
                 :<Image
             src={infos.thumnail_url}
         /> } 
