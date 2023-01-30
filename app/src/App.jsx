@@ -26,7 +26,7 @@ function App() {
       <NavbarDashboard/>
 
         <Routes>
-        <Route path="/" element={<><Top></Top><HomePage/></>  } />
+        <Route path="/" element={<><HomePage/></>  } />
         <Route path="/MyAnouncements" element={ <MyAnouncements/> } />
       </Routes>
       <Routes>
@@ -36,7 +36,7 @@ function App() {
       </Routes>
         </BrowserRouter>
 
-      <HomePage/>
+      
 
 
 

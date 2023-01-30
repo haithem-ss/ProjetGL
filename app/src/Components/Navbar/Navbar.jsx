@@ -24,7 +24,6 @@ function Navbar() {
     localStorage.removeItem("userData")
     location.reload()
   }
-  const navigate = useNavigate();
 
   const isStaff = JSON.parse(localStorage.getItem("userData"))?.staff === true
   const isLoggedIn = JSON.parse(localStorage.getItem("userData")) != null
