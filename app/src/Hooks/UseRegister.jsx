@@ -16,11 +16,12 @@ const UseRegister=(UserInfos,toast,navigate)=> {
                   isClosable: true,
                 })
                 setTimeout(()=>{
-                    navigate("/");
+                    navigate("/Login");
                 },3000)
               }
         })
         .catch((err)=>{
+          console.log(err)
             toast({
                 title: 'There was an error',
                 description: "Please verify and try again",

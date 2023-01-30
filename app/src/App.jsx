@@ -15,6 +15,7 @@ import Dashboard_courses from "./Pages/Dashboard/Dashboard_courses"
 import Dashboard from "./Pages/Dashboard/Dashboard"
 import SignUp from './Components/Signing/SignUP'
 import GoogleAuth from "./Hooks/GoogleAuth"
+import FavouriteCourses from './Pages/FavouriteCourses'
 function App() {
   return (
     <div className="App">
@@ -27,7 +28,9 @@ function App() {
             <Route path="/Register" element={<SignUp></SignUp>} />
             <Route path="/login" element={<SignIn></SignIn>} />
             <Route path="/google" element={<GoogleAuth></GoogleAuth>} />
-            <Route path="/MyAnouncements" element={<MyAnouncements />} />
+            <Route path="/ControlPanel" element={<MyAnouncements />} />
+            <Route path="/Course/:title" element={<CoursePage />} />
+            <Route path="/FavouritesCourses" element={<FavouriteCourses />} />
           </Routes>
           <Routes>
             <Route path="/Dashboard" element={<Dashboard></Dashboard>} />
@@ -36,7 +39,6 @@ function App() {
           </Routes>
 
 
-      </BrowserRouter>
 
         {/* <NavbarDashboard />
 
@@ -63,16 +65,9 @@ function App() {
             element={<Dashboard_courses></Dashboard_courses>}
           />
         </Routes> */}
-        <Routes>
-          <Route path="/user" element={<UserFieldsPage />} />
-          <Route path="/user/securit" element={<SecurityPage />} />
-          <Route path="/user/webscraper" element={<WebScraper />} />
-          <Route path="/user/cours" element={<ProductPage />} />
-          <Route path="/user/cours/edit" element={<EditProductPage />} />
-        </Routes>
+
       </BrowserRouter>
 
-      {/* <HomePage /> */}
     </div>
   );
 }

@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
-from .models import Module, Adresse, Cours
+from .models import Module, Adresse, Cours,User
 from .serializers import ModuleSerializer, AdresseSerializer, CoursSerializer
 from django.http import FileResponse, Http404, HttpResponse, JsonResponse
 import cloudinary
@@ -131,6 +131,7 @@ class CoursViews(APIView):
     # lister les cours
     # parser_classes = [MultiPartParser, FormParser]
 
+
     def get(self, request, *args, **kwargs):
         cours = Cours.objects.all()
         serializer = CoursSerializer(cours, many=True)
@@ -143,6 +144,9 @@ class CoursViews(APIView):
         cours = CoursSerializer(data=data)
         if cours.is_valid():
             cours.save()
+            auteur=User.objects.get(id=request.user.id)
+            auteur.is_staff=True
+            auteur.save()
             return Response(cours.data, status=status.HTTP_201_CREATED)
         return Response(cours.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -150,7 +154,6 @@ class CoursViews(APIView):
         id = request.data.get("id")
         cours = Cours.objects.get(id=id)
         try:
-
             cours.module_id = request.data['module']
             cours.modalité = request.data['modalité']
             cours.description = request.data['description']
@@ -168,13 +171,26 @@ class CoursViews(APIView):
     # Supprimer un cours
 
     def delete(self, request, *args, **kwargs):
-        id = request.data.get('id')
+        pk = request.data.get('id')
+        print(pk)
         try:
-            cours = Cours.objects.get(id=id)
+            cours = Cours.objects.get(id=pk)
             cours.delete()
             return Response("Suppression avec succes", status=status.HTTP_202_ACCEPTED)
         except:
             return Response("Cours non existant", status=status.HTTP_404_NOT_FOUND)
+
+
+class CoursAuteurViews(APIView):
+    permission_classes = [permissions.AllowAny]
+    # lister les cours
+    # parser_classes = [MultiPartParser, FormParser]
+    def get(self, request, *args, **kwargs):
+        cours = Cours.objects.filter(auteur=request.GET.get('id'))
+        serializer = CoursSerializer(cours, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # Ajouter un adresse
 
 
 def scrape_data(request):

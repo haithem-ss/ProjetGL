@@ -9,7 +9,6 @@ const UseLogin=async (UserInfos,toast,navigate)=> {
             if (res.status===200){
                 toast({
                   title: 'Logged in successfully',
-                  description: "Please login now.",
                   status: 'success',
                   position: 'bottom-right',
                   duration: 2000,
@@ -25,6 +24,7 @@ const UseLogin=async (UserInfos,toast,navigate)=> {
                   prenom:res.data.prenom,
                   staff:res.data.staff,
                 }
+                console.log(userData)
                 localStorage.setItem("userData",JSON.stringify(userData))
 
                 let Tokens={

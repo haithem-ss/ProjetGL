@@ -10,7 +10,8 @@ from .serializer import FavoriteCourseSerializer
 
 @api_view(['GET'])
 def getFavoriteCours(request):
-    favoriteCours = FavoriteCours.objects.all()
+    print(request.GET.get('user'))
+    favoriteCours = FavoriteCours.objects.filter(user=request.GET.get('user'))
     serializer = FavoriteCourseSerializer(favoriteCours, many=True)
     return Response(serializer.data)
 
@@ -21,6 +22,8 @@ def postFavoriteCours(request):
         'cours': request.data.get('cours'),
         'user': request.data.get('user'),
     }
+    if FavoriteCours.objects.filter(cours=data["cours"],user=data["user"]).exists() :
+        return Response({"message":"AlreadyExists"}, status=200)
     favoriteCours = FavoriteCourseSerializer(data=data)
     if favoriteCours.is_valid():
         favoriteCours.save()
