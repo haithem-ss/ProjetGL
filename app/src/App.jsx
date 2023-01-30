@@ -16,11 +16,8 @@ import Dashboard from "./Pages/Dashboard/Dashboard"
 import SignUp from './Components/Signing/SignUP'
 import GoogleAuth from "./Hooks/GoogleAuth"
 function App() {
-
   return (
     <div className="App">
-
-
       <BrowserRouter>
         {/* <Navbar/> */}
         {/* <NavbarDashboard/> */}
@@ -41,9 +38,43 @@ function App() {
 
       </BrowserRouter>
 
+        {/* <NavbarDashboard />
 
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Top></Top>
+                <HomePage />
+              </>
+            }
+          />
+          <Route path="/MyAnouncements" element={<MyAnouncements />} />
+        </Routes>
+        <Routes>
+          <Route path="/Dashboard" element={<Dashboard></Dashboard>} />
+          <Route
+            path="/Dashboard/Users"
+            element={<Dashboard_users></Dashboard_users>}
+          />
+          <Route
+            path="/Dashboard/Courses"
+            element={<Dashboard_courses></Dashboard_courses>}
+          />
+        </Routes> */}
+        <Routes>
+          <Route path="/user" element={<UserFieldsPage />} />
+          <Route path="/user/securit" element={<SecurityPage />} />
+          <Route path="/user/webscraper" element={<WebScraper />} />
+          <Route path="/user/cours" element={<ProductPage />} />
+          <Route path="/user/cours/edit" element={<EditProductPage />} />
+        </Routes>
+      </BrowserRouter>
+
+      {/* <HomePage /> */}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

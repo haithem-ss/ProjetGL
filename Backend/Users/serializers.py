@@ -9,14 +9,19 @@ from django.conf import settings
 from rest_framework.exceptions import AuthenticationFailed
 
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id","email","nomEtablissement","prenom","nom","dateInscription","phoneNumber"]
+        fields = ["id", "email", "nomEtablissement",
+                  "prenom", "nom", "dateInscription", "phoneNumber", "bio", "image_url", "adresse"]
+
     def to_representation(self, instance):
         reps = super().to_representation(instance)
         reps['coursesCount'] = Cours.objects.filter(auteur=instance.id).count()
         return reps
+
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
