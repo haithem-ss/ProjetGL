@@ -16,8 +16,27 @@ import {
     Box,
     Container
 } from '@chakra-ui/react'
+import RequestManager from "../Hooks/AxiosInstance";
+function useCours (filters=null) {
+    console.log(filters)
+    const [data, setData] = React.useState(null);
+    React.useEffect(() => {
+     RequestManager.get("cours/auteur",{params:filters})
+        .then((res)=>{
+            console.log(res)
+            setData(res.data)
+        })
+     }, []);
+     if (filters===null || filters==={}){
+     return data;
+        
+     }
+     return data;
+}
 
-export default function App() {
+export default function App({instructor}) {
+    
+    let cours=useCours({id:instructor})
     const sliderRef = React.useRef(null);
     const handlePrev = React.useCallback(() => {
         if (!sliderRef.current) return;
@@ -60,12 +79,11 @@ export default function App() {
                 className="mySwiper"
                 ref={sliderRef}
             >
-                <SwiperSlide><AnnonceCard /></SwiperSlide>
-                <SwiperSlide><AnnonceCard /></SwiperSlide>
-                <SwiperSlide><AnnonceCard /></SwiperSlide>
-                <SwiperSlide><AnnonceCard /></SwiperSlide>
-                <SwiperSlide><AnnonceCard /></SwiperSlide>
-                <SwiperSlide><AnnonceCard /></SwiperSlide>
+                {cours && cours.map((item)=>(
+                <SwiperSlide><AnnonceCard  infos={item}/></SwiperSlide>
+
+                ))}
+
 
             </Swiper>
         </Container>

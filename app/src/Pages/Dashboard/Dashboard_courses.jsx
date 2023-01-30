@@ -19,7 +19,7 @@ import {
     MenuItemOption,
     MenuGroup,
     MenuOptionGroup,
-    MenuDivider,
+    useToast,
     IconButton
 } from '@chakra-ui/react'
 
@@ -34,15 +34,21 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion"
 import UseCours from "../../Hooks/UseCours"
-
-
+import { useNavigate } from "react-router-dom";
+import UseDeleteCours from "../../Hooks/UseDeleteCours"
 export default function () {
+    const navigate = useNavigate();
     const [filter,setFilter]=React.useState({})
     let commandes = UseCours(filter)
+    let toast=useToast()
     const count = React.useRef(0);
+    const deleteCourse=(id)=>{
+        UseDeleteCours(id,toast)
+    }
 
 
     return (<div className="dashboard">
+        <Navbar/>
         <Sidebar />
 
         <div className="ContentWrapper">
@@ -116,9 +122,9 @@ export default function () {
                                                     borderRadius={0} border="0" _hover={{ borderColor: "#343A40 " }} _active={{}} outline="0px"
                                                 />
                                                 <MenuList>
-                                                    <MenuItem borderRadius={0} border="0" _hover={{ borderColor: "white ", border: "0px", outline: 0 }} _active={{ borderColor: "white ", border: "0px", outline: 0 }} outline="0px">View course</MenuItem>
+                                                    <MenuItem borderRadius={0} border="0" _hover={{ borderColor: "white ", border: "0px", outline: 0 }} _active={{ borderColor: "white ", border: "0px", outline: 0 }} outline="0px" onClick={()=>navigate(`/Course/${course.titre}`,{state:course})}>View course</MenuItem>
                                                     <MenuItem borderRadius={0} border="0" _hover={{ borderColor: "white ", border: "0px", outline: 0 }} _active={{ borderColor: "white ", border: "0px", outline: 0 }} outline="0px">View instructor	</MenuItem>
-                                                    <MenuItem borderRadius={0} border="0" _hover={{ borderColor: "white ", border: "0px", outline: 0 }} _active={{ borderColor: "white ", border: "0px", outline: 0 }} outline="0px">Delete course</MenuItem>
+                                                    <MenuItem borderRadius={0} border="0" _hover={{ borderColor: "white ", border: "0px", outline: 0 }} _active={{ borderColor: "white ", border: "0px", outline: 0 }} outline="0px" onClick={()=> deleteCourse(course.id)}>Delete course</MenuItem>
                                                 </MenuList>
                                             </Menu>
                                         </Td>

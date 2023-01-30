@@ -16,14 +16,14 @@ export default function ({ title, buttonVariant, data }) {
     React.useEffect(() => {
         setLoading(true)
         setTimeout(()=>{
+            console.log(data)
             setCourses(data)
-        },700)
+        },1300)
         setTimeout(() => {
             setLoading(false)
-        }, 1000)
+        }, 1500)
     }, [data])
     return < >
-          <Container maxW="90vw" margin="2rem auto" >
 
         <Heading fontSize="2xl" >
             {title}
@@ -35,8 +35,8 @@ export default function ({ title, buttonVariant, data }) {
                 ))}
             </> : <>
                 <Box></Box>
-                {loading === true ? <Flex height={300} align="center" justify="center"><Spinner margin="auto" color='blue.500' size='xl' thickness='4px' /></Flex> :
-                    <Flex height={300} ><Text fontSize="2xl" fontWeight={600} width="100%" margin="auto" textAlign="center">No results found</Text></Flex>
+                {loading === true ? <Box height="100%" alignItems="center" justifyContent="center"><Spinner margin="auto" color='blue.500' size='xl' thickness='4px' /></Box> :
+                    <Box height="100%" ><Text fontSize="2xl" height="100%" fontWeight={600} width="100%" margin="auto" textAlign="center">No results found</Text></Box>
                 }
             </>}
 
@@ -72,7 +72,6 @@ export default function ({ title, buttonVariant, data }) {
             </Center> : null}
         </> : null}
 
-        </Container>
 
 
     </>

@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import FavoriteCours
+from Cours.models import Cours
+from Cours.serializers import CoursSerializer
 
 
 class FavoriteCourseSerializer(serializers.ModelSerializer):
@@ -9,3 +11,7 @@ class FavoriteCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = FavoriteCours
         fields = '__all__'
+    def to_representation(self, instance):
+        reps = super().to_representation(instance)
+        reps = CoursSerializer(Cours.objects.get(id=reps["cours"]), many=False).data
+        return reps

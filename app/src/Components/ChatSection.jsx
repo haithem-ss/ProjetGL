@@ -16,8 +16,8 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import UseMessages from '../Hooks/UseMessages'
-
-const DateMessages = ({ dte }) => {
+import ScrollableFeed from 'react-scrollable-feed'
+ const DateMessages = ({ dte }) => {
 
     return <Text margin="10px" color="#6C757D" fontSize="xs" textAlign="center" >
         {dte}

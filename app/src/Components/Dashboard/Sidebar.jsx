@@ -1,4 +1,4 @@
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link,useNavigate } from "react-router-dom";
 
 const UsersIcon = () => (
   <svg
@@ -83,8 +83,8 @@ const DashboardIcon = () => (
     </defs>
   </svg>
 );
-const LogoutIcon = () => (
-  <div className="SideBarItem logout">
+const LogoutIcon = ({navigate}) => (
+  <div className="SideBarItem logout" onClick={()=> navigate("/")}>
     <svg
       width="28"
       height="28"
@@ -144,6 +144,7 @@ const SideBarItem = (icon, text, active, path) => {
 
 export default function () {
   const { pathname } = useLocation();
+  let navigate =useNavigate()
   let current;
   if (pathname.split("/").length === 2) current = 1;
   else if (pathname.split("/")[2] === "Courses") current = 2;
@@ -160,7 +161,7 @@ export default function () {
         ? SideBarItem(<UsersIcon />, "Users", true, links[2])
         : SideBarItem(<UsersIcon />, "Users", false, links[2])}
 
-      <LogoutIcon />
+      <LogoutIcon navigate={navigate}  />
     </div>
   );
 }

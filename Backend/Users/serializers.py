@@ -4,15 +4,27 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import (
     TokenObtainPairSerializer,
 )
+from django.conf import settings
+
+from rest_framework.exceptions import AuthenticationFailed
+
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id","email","nomEtablissement","prenom","nom","dateInscription","phoneNumber"]
+        fields = "__all__"
     def to_representation(self, instance):
         reps = super().to_representation(instance)
         reps['coursesCount'] = Cours.objects.filter(auteur=instance.id).count()
         return reps
+    def create(self, validated_data):
+        password = validated_data.pop('password')
+        user = super().create(validated_data)
+        user.set_password(password)
+        user.save()
+        return user
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)

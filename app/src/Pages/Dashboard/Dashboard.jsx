@@ -22,6 +22,8 @@ export default function () {
 
 
     return (<div className="dashboard">
+        <Navbar/>
+
         <Sidebar />
 
         {/* <div className="ContentWrapper">

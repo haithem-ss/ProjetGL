@@ -7,14 +7,14 @@ import "./scroll.css";
 import TOP from "../Landing/Top";
 
 function UnderNavbar() {
-const [isShown, setShown] = useState(false);
+const [isShown, setShown] = useState(true);
   const height=(0.9 * window.innerHeight)
   const handleScroll = () => {
-    if (window.pageYOffset > height) {
-      setShown(true);
-    } else {
-      setShown(false);
-    }
+    // if (window.pageYOffset > height) {
+    //   setShown(true);
+    // } else {
+    //   setShown(false);
+    // }
   };
 
   React.useEffect(() => {
