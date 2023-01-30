@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import Social1 from "../Components/Signing/Vector 4.svg"
+import { Text, Flex, Image, Button,useToast,FormControl,FormLabel,Input,FormErrorMessage,FormHelperText,Radio,Link,Show} from "@chakra-ui/react";
 import { gapi } from 'gapi-script';
+import { useNavigate } from 'react-router-dom';
 
 function GoogleAuth() {
     const [ profile, setProfile ] = useState([]);
+    let navigate=useNavigate()
     const clientId = '1029852426120-knmri2g5rju9u5cortjhup7qp56n4vl6.apps.googleusercontent.com';
     useEffect(() => {
         const initClient = () => {
@@ -17,8 +21,10 @@ function GoogleAuth() {
     });
 
     const onSuccess = (res) => {
-        setProfile(res.profileObj);
         console.log(res)
+        setProfile(null);
+        navigate("/")
+
     };
 
     const onFailure = (err) => {
@@ -26,25 +32,9 @@ function GoogleAuth() {
     };
 
     const logOut = () => {
-        setProfile(null);
     };
 
     return (
-        <div>
-            <h2>React Google Login</h2>
-            <br />
-            <br />
-            {profile ? (
-                <div>
-                    <img src={profile.imageUrl} alt="user image" />
-                    <h3>User Logged in</h3>
-                    <p>Name: {profile.name}</p>
-                    <p>Email Address: {profile.email}</p>
-                    <br />
-                    <br />
-                    <GoogleLogout clientId={clientId} buttonText="Log out" onLogoutSuccess={logOut} />
-                </div>
-            ) : (
                 <GoogleLogin
                     clientId={clientId}
                     buttonText="Sign in with Google"
@@ -52,9 +42,10 @@ function GoogleAuth() {
                     onFailure={onFailure}
                     cookiePolicy={'single_host_origin'}
                     isSignedIn={true}
+                    render={renderProps => (
+                        <Button w='30%' onClick={renderProps.onClick}  h='10'bgColor='white' borderRadius='4px' border='1px' borderColor='gray.500' > <Image src={Social1} ></Image> </Button>
+                      )}
                 />
-            )}
-        </div>
     );
 }
 export default GoogleAuth;

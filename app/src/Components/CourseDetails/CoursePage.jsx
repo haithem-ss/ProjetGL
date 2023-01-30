@@ -13,6 +13,9 @@ import RequestManager from "../../Hooks/AxiosInstance";
 import { useNavigate } from "react-router-dom";
 import CardsSlider from "../CardsSlider"
 import useAddFavourite from "../../Hooks/useAddFavourite";
+import Footer from "../../profil enseignant/Footer"
+import Navbar from "../Navbar/Navbar"
+
 function Course() {
     const location = useLocation();
     const toast=useToast()
@@ -36,9 +39,10 @@ function Course() {
     }
 return(
     <>
+    <Navbar/>
     <Flex mw='100vw' mh='100vh' justifyContent='center' flexDirection='column' alignItems='center' mt={['5','5','5','5']}>
         <Flex  display={['none','none','flex','flex']} w='90%'  justify="space-between">
-        <Breadcrumb spacing='8px' separator={<ChevronRightIcon color='gray.500' />}>
+        <Breadcrumb  marginTop="10vh" marginBottom="1vh" spacing='8px' separator={<ChevronRightIcon color='gray.500' />}>
             <BreadcrumbItem>
                 <BreadcrumbLink href='#'>Course</BreadcrumbLink>
             </BreadcrumbItem>
@@ -58,12 +62,12 @@ return(
                 <Image src={CourseImage} alt="CourseImage" />
                 <Text display={['none','none','flex','flex']} alignSelf='flex-start'>instructed By:</Text>
                 <Flex border='1px' padding='5'  display={['none','none','flex','flex']}>
-                    <Flex gap='5' maxWidth='90%'>
+                    <Flex gap='5' maxWidth='90%' cursor={"pointer"} onClick={()=>navigate("/Instructor",{state:CourseInfos})}>
                         <Image src={ProfilePicture} w='60px' h='60px' borderRadius='full' alt="InstructorProfile" />
                         <Flex flexDirection='column' mt='2' gap='2' width='80%'>
                             <Text fontSize='xl' fontWeight='700'>{CourseInfos.auteur.nom+" "+CourseInfos.auteur.prenom}</Text>
                             <Text color='#6C757D' >{CourseInfos.auteur.coursesCount} courses</Text>
-                            <Text fontSize='sm'>“Bio” - Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.  </Text>
+                            <Text fontSize='sm'>{CourseInfos.auteur.bio}</Text>
                             <Flex alignItems='center' gap='2' >
                                 <Image src={EmailVector} w='15px' h='15px'  alt="Email Logo" />
                                 <Text maxWidth='80%'>{CourseInfos.auteur.email}</Text>
@@ -100,6 +104,8 @@ return(
         </Flex>
     </Flex>
         <CardsSlider instructor={CourseInfos.auteur.id}/>
+        <Footer/> 
+
     </>
 
 );}

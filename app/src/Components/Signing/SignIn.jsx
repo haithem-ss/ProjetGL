@@ -9,6 +9,7 @@ import zeus from "./zeus.svg";
 import { useState } from "react";
 import UseLogin from "../../Hooks/UseLogin";
 import {useNavigate} from "react-router-dom"
+import GoogleAuth from "../../Hooks/GoogleAuth";
 
 export default function SignIn(){
     const toast = useToast()
@@ -69,7 +70,7 @@ export default function SignIn(){
                         <Image src={Line} w='20%'></Image>
                     </Flex>
                     <Flex justifyContent='space-between' w='100%' mt='5'>
-                        <Button w='30%'  h='10'bgColor='white' borderRadius='4px' border='1px' borderColor='gray.500' > <Image src={Social1} ></Image> </Button>
+                        <GoogleAuth></GoogleAuth>
                         <Button w='30%' h='10'bgColor='white' borderRadius='4px' border='1px' borderColor='gray.500' > <Image src={Social2} ></Image> </Button>
                         <Button w='30%'  h='10'bgColor='white' borderRadius='4px' border='1px' borderColor='gray.500' > <Image src={Social3} ></Image> </Button>
                     </Flex>

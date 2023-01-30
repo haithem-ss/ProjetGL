@@ -53,7 +53,7 @@ function Navbar() {
             <Image maxWidth={['15%', '15%', '10%', '8%']} src={logo} max></Image>
             <Flex h='100%' alignItems='Center' display={['none', 'none', 'flex', 'flex']} color='white' >
               <Divider transition="all 0.1s ease-in-out" orientation='vertical' borderWidth='1px' opacity='1' borderColor={isShown ? 'white' : '#1F1F1F'} />
-              <Link padding='6' _hover={{ bgColor: 'white', color: 'black' }} >HOME</Link>
+              <Link padding='6' _hover={{ bgColor: 'white', color: 'black' }}onClick={() => navigate("/")} >HOME</Link>
               <Divider transition="all 0.1s ease-in-out" orientation='vertical' borderWidth='1px' opacity='1' borderColor={isShown ? 'white' : '#1F1F1F'} />
               <Link padding='6' _hover={{ bgColor: 'white', color: 'black' }}>COURSES</Link>
               <Divider transition="all 0.1s ease-in-out" orientation='vertical' borderWidth='1px' opacity='1' borderColor={isShown ? 'white' : '#1F1F1F'} height="99%" />

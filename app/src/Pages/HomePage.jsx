@@ -7,7 +7,7 @@ import {Container} from "@chakra-ui/react"
 import UnderNavbar from '../Components/Navbar/underNavPattern'
 import useCours from '../Hooks/UseCours'
 import React from 'react'
-
+import Footer from "../profil enseignant/Footer"
 
 export default function () {
     const [filters, setFilters] = React.useState({})
@@ -21,5 +21,6 @@ export default function () {
         <SearchFilters Filters={(newFilter) => setFilters(newFilter)} />
         <CardsContainer title="Most Popular" buttonVariant={1} data={data} />
     </Container>
+    <Footer/>
     </>
 }

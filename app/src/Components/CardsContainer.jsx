@@ -23,7 +23,18 @@ export default function ({ title, buttonVariant, data }) {
             setLoading(false)
         }, 1500)
     }, [data])
-    return < >
+
+    const initChat=()=>{
+        RequestManager.post("chat/conversations/",{
+            user1:CourseInfos.auteur.id,
+            user2:userInfos.id})
+            .then((res)=>{
+                    console.log(res.data)
+                    navigate("/MyAnouncements")
+            })
+            .catch((err)=>console.log(err))
+        }
+    return <Box  margin="1rem 0rem" justifyContent="center" alignItems="center">
 
         <Heading fontSize="2xl" >
             {title}
@@ -74,5 +85,5 @@ export default function ({ title, buttonVariant, data }) {
 
 
 
-    </>
+    </Box>
 }

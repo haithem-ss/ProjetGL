@@ -14,12 +14,14 @@ import Chat from '../Components/Chat'
 import useCours from '../Hooks/UseCours'
 import Navbar from "../Components/Navbar/Navbar"
 import UseAuteurCourses from '../Hooks/UseAuteurCourses'
+import Footer from "../profil enseignant/Footer"
+
 export default function () {
     const userId = JSON.parse(localStorage.getItem("userData")).id
     let data = UseAuteurCourses(userId);
     return <>
         <Navbar />
-        <Container maxW="90vw" margin="2rem auto" >
+        <Container maxW="90vw" margin="2rem auto" minH="100vh">
 
             <Tabs variant='unstyled' padding="0" marginTop="14vh">
                 <Flex justify="space-between">
@@ -54,5 +56,6 @@ export default function () {
                 </TabPanels>
             </Tabs>
         </Container>
+        <Footer/> 
     </>
 }

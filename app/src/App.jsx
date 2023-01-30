@@ -16,6 +16,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard"
 import SignUp from './Components/Signing/SignUP'
 import GoogleAuth from "./Hooks/GoogleAuth"
 import FavouriteCourses from './Pages/FavouriteCourses'
+import FirstComponent from "./profil enseignant/FirstComponent"
 function App() {
   return (
     <div className="App">
@@ -31,8 +32,7 @@ function App() {
             <Route path="/ControlPanel" element={<MyAnouncements />} />
             <Route path="/Course/:title" element={<CoursePage />} />
             <Route path="/FavouritesCourses" element={<FavouriteCourses />} />
-          </Routes>
-          <Routes>
+            <Route path="/Instructor" element={<FirstComponent />} />
             <Route path="/Dashboard" element={<Dashboard></Dashboard>} />
             <Route path="/Dashboard/Users" element={<Dashboard_users></Dashboard_users>} />
             <Route path="/Dashboard/Courses" element={<Dashboard_courses></Dashboard_courses>} />
