@@ -8,3 +8,14 @@
       background-position:-3000px 0px ;
     }
   }
+.NavSlide{
+  overflow-y: hidden;
+  animation:slide 1s ;
+}
+
+@keyframes slide {
+  from {height:0vh;}
+  to {height: 40vh;
+  justify-content: center;}
+
+}
