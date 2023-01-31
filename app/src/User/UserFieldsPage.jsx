@@ -13,69 +13,7 @@ import {
 import Vector from "./assets/Vector.png";
 import axios from "axios";
 import "../User/styles/general.css";
-export const LinksDiv = ({ currentClass }) => {
-  return (
-    <Stack
-      display={"flex"}
-      flexDirection={"row"}
-      alignItems={"baseline"}
-      justifyContent={"center"}
-      gap={20}
-    >
-      <Link
-        height={"30px"}
-        width={"150px"}
-        href="/user"
-        fontSize={"0.875rem"}
-        background={currentClass === "General" ? "#343A40" : "#F8F9FA"}
-        color={currentClass === "General" ? "white" : "black"}
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        _hover={{
-          background: currentClass === "General" ? "#343A40" : "#F8F9FA",
-          color: currentClass === "General" ? "white" : "black",
-        }}
-        _active={{
-          background: currentClass === "General" ? "#343A40" : "#F8F9FA",
-          color: currentClass === "General" ? "white" : "black",
-        }}
-        _focus={{
-          background: currentClass === "General" ? "#343A40" : "#F8F9FA",
-          color: currentClass === "General" ? "white" : "black",
-        }}
-      >
-        General
-      </Link>
-      <Link
-        fontSize={"0.875rem"}
-        width={"150px"}
-        height={"30px"}
-        href="/user/security"
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        background={currentClass === "security" ? "#343A40" : "#F8F9FA"}
-        color={currentClass === "security" ? "white" : "black"}
-        _hover={{
-          background: currentClass === "security" ? "#343A40" : "#F8F9FA",
-          color: currentClass === "security" ? "white" : "black",
-        }}
-        _active={{
-          background: currentClass === "security" ? "#343A40" : "#F8F9FA",
-          color: currentClass === "security" ? "white" : "black",
-        }}
-        _focus={{
-          background: currentClass === "security" ? "#343A40" : "#F8F9FA",
-          color: currentClass === "security" ? "white" : "black",
-        }}
-        outline={"1px solid #CED4DA"}
-      >
-        Security
-      </Link>
-    </Stack>
-  );
-};
+
 
 const ImageDiv = ({ firstName, lastName }) => {
   const [file, setFile] = useState("");
@@ -330,18 +268,16 @@ const UserFieldsPage = () => {
       flexDirection={"column"}
       alignItems={"center"}
       marginTop={2}
-      width={"100vw"}
     >
-      <LinksDiv currentClass={"General"} />
       <Box
         display={"flex"}
+        width="100%"
         flexDirection={{
           base: "column",
           md: "row",
         }}
-        alignItems={"flex-start"}
+        justifyContent="center"
         marginTop={4}
-        gap={50}
       >
         <Stack className="left" direction="column" spacing={4} marginTop={10}>
           <ImageDiv

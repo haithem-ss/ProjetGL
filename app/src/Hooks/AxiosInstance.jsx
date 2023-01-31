@@ -30,7 +30,7 @@ RequestManager.interceptors.request.use(async req => {
     const response = await axios.post(`${baseURL}/users/token/refresh/`, {
         refresh: authTokens.refresh
       });
-
+      console.log(response)
     localStorage.setItem('authTokens', JSON.stringify({access:response.data.access,refresh:authTokens.refresh}))
     req.headers.Authorization = `Bearer ${response.data.access}`
     return req

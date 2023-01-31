@@ -15,6 +15,7 @@ import CardsSlider from "../CardsSlider"
 import useAddFavourite from "../../Hooks/useAddFavourite";
 import Footer from "../../profil enseignant/Footer"
 import Navbar from "../Navbar/Navbar"
+import NoImage from "../../assets/NOimage.png"
 
 function Course() {
     const location = useLocation();
@@ -59,8 +60,11 @@ return(
         <Flex mw='100vw' mh='100vh' justifyContent='center' alignItems={['center','center','flex-start','flex-start']}  gap={['5vh','5vh','10vh','10vh']} mt='4' flexDirection={['column','column','row','row']}  >
             <Flex flexDirection='Column' w={['90%','90%','30%','30%']} alignItems='center' justifyContent='center' gap='5' >
                 
-                <Image src={CourseImage} alt="CourseImage" />
-                <Text display={['none','none','flex','flex']} alignSelf='flex-start'>instructed By:</Text>
+            {CourseInfos.thumnail_url===null || CourseInfos.thumnail_url==="" ? <Image
+                src={NoImage}/>
+                :<Image
+            src={infos.thumnail_url}
+        /> }                 <Text display={['none','none','flex','flex']} alignSelf='flex-start'>instructed By:</Text>
                 <Flex border='1px' padding='5'  display={['none','none','flex','flex']}>
                     <Flex gap='5' maxWidth='90%' cursor={"pointer"} onClick={()=>navigate("/Instructor",{state:CourseInfos})}>
                         <Image src={ProfilePicture} w='60px' h='60px' borderRadius='full' alt="InstructorProfile" />

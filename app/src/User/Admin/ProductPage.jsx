@@ -227,68 +227,68 @@ const ProductPage = () => {
         margin={"20px auto"}
       >
         <LinksDiv currentClass={"Anouncements"} />
-        <Box className="header_buttons_1">
-          <Button
-            height={"40px"}
-            background={"#DEE2E6"}
-            color={"#343A40"}
-            width={"150px"}
-            mt={10}
-            mx={5}
-            borderRadius={"0px"}
-            _hover={{
-              background: "#DEE2E6",
-              color: "#343A40",
-              outline: "none",
-              border: "none",
-            }}
-            _active={{
-              background: "#DEE2E6",
-              color: "#343A40",
-              outline: "none",
-              border: "none",
-            }}
-            _focus={{
-              background: "#DEE2E6",
-              color: "#343A40",
-              outline: "none",
-              border: "none",
-            }}
-          >
-            Discard
-          </Button>
-          <Button
-            height={"40px"}
-            backgroundColor={"#00F07D"}
-            color={"black"}
-            width={"150px"}
-            mt={10}
-            mx={5}
-            borderRadius={"0px"}
-            _hover={{
-              backgroundColor: "#00F07D",
-              color: "black",
-              outline: "none",
-              border: "none",
-            }}
-            _active={{
-              backgroundColor: "#00F07D",
-              color: "black",
-              outline: "none",
-              border: "none",
-            }}
-            _focus={{
-              backgroundColor: "#00F07D",
-              color: "black",
-              outline: "none",
-              border: "none",
-            }}
-            type="submit"
-            id="btn_submit"
-          >
-            Save
-          </Button>
-        </Box>
+          <Box className="header_buttons_1">
+            <Button
+              height={"40px"}
+              background={"#DEE2E6"}
+              color={"#343A40"}
+              width={"150px"}
+              mt={10}
+              mx={5}
+              borderRadius={"0px"}
+              _hover={{
+                background: "#DEE2E6",
+                color: "#343A40",
+                outline: "none",
+                border: "none",
+              }}
+              _active={{
+                background: "#DEE2E6",
+                color: "#343A40",
+                outline: "none",
+                border: "none",
+              }}
+              _focus={{
+                background: "#DEE2E6",
+                color: "#343A40",
+                outline: "none",
+                border: "none",
+              }}
+            >
+              Discard
+            </Button>
+            <Button
+              height={"40px"}
+              backgroundColor={"#00F07D"}
+              color={"black"}
+              width={"150px"}
+              mt={10}
+              mx={5}
+              borderRadius={"0px"}
+              _hover={{
+                backgroundColor: "#00F07D",
+                color: "black",
+                outline: "none",
+                border: "none",
+              }}
+              _active={{
+                backgroundColor: "#00F07D",
+                color: "black",
+                outline: "none",
+                border: "none",
+              }}
+              _focus={{
+                backgroundColor: "#00F07D",
+                color: "black",
+                outline: "none",
+                border: "none",
+              }}
+              type="submit"
+              id="btn_submit"
+            >
+              Save
+            </Button>
+          </Box>
       </Box>
       <div className="Product_header">
         <button

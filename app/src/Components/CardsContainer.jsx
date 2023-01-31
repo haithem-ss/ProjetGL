@@ -39,15 +39,15 @@ export default function ({ title, buttonVariant, data }) {
         <Heading fontSize="2xl" >
             {title}
         </Heading>
-        <Box display="grid" gridColumnGap="40px" gridRowGap="40px" gridTemplateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)"]} margin="1rem auto" >
+        <Box display="grid"  minH="70vh" gridColumnGap="40px" gridRowGap="40px" gridTemplateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)", "repeat(3, 1fr)"]} margin="1rem auto" >
             {courser != null && courser.length != 0 ? <>
                 {courser.map((item) => (
                     <AnnonceCard infos={item} />
                 ))}
             </> : <>
                 <Box></Box>
-                {loading === true ? <Box height="100%" alignItems="center" justifyContent="center"><Spinner margin="auto" color='blue.500' size='xl' thickness='4px' /></Box> :
-                    <Box height="100%" ><Text fontSize="2xl" height="100%" fontWeight={600} width="100%" margin="auto" textAlign="center">No results found</Text></Box>
+                {loading === true ? <Box height="100%" display={"flex"} alignItems="center" justifyContent="center"><Spinner margin="auto" color='blue.500' size='xl' thickness='4px' /></Box> :
+                    <Box height="100%" display={"flex"} alignItems="center" justifyContent="center" ><Text fontSize="2xl" fontWeight={600} width="100%" margin="auto" textAlign="center">No results found</Text></Box>
                 }
             </>}
 

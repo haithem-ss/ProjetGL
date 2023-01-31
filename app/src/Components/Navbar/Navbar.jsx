@@ -76,13 +76,14 @@ const [IsToggeled, setIsToggeled] = useState(false);
                     <>
                       <MenuItem bg="#1F1F1F" _hover={{ bgColor: 'white', color: 'black', minHeight: "100%", boreder: 0, borderRadius: 0 }} onClick={() => navigate("/Dashboard")}>Dashboard</MenuItem>
                       <MenuItem bg="#1F1F1F" _hover={{ bgColor: 'white', color: 'black', minHeight: "100%", boreder: 0, borderRadius: 0 }} onClick={() => navigate("/ControlPanel")}>Control pannel</MenuItem>
+                      <MenuItem bg="#1F1F1F" _hover={{ bgColor: 'white', color: 'black', minHeight: "100%", boreder: 0, borderRadius: 0 }} onClick={() => navigate("/user")}>Account settings</MenuItem>
                       <MenuItem bg="#1F1F1F" _hover={{ bgColor: 'white', color: 'black', minHeight: "100%", boreder: 0, borderRadius: 0 }} onClick={Logout}>Logout</MenuItem>
-
                     </>
                   }
                   {!isStaff && isLoggedIn && <>
                     <MenuItem bg="#1F1F1F" _hover={{ bgColor: 'white', color: 'black', minHeight: "100%", boreder: 0, borderRadius: 0 }} onClick={() => navigate("/Messages")} >My messages</MenuItem>
                     <MenuItem bg="#1F1F1F" _hover={{ bgColor: 'white', color: 'black', minHeight: "100%", boreder: 0, borderRadius: 0 }} onClick={() => navigate("/Favourites")}>My favourites</MenuItem>
+                    <MenuItem bg="#1F1F1F" _hover={{ bgColor: 'white', color: 'black', minHeight: "100%", boreder: 0, borderRadius: 0 }} onClick={() => navigate("/user")}>Account settings</MenuItem>
                     <MenuItem bg="#1F1F1F" _hover={{ bgColor: 'white', color: 'black', minHeight: "100%", boreder: 0, borderRadius: 0 }} onClick={Logout}>Logout</MenuItem>
 
                   </>}

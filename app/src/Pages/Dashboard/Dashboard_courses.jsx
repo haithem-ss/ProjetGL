@@ -30,11 +30,8 @@ import { SectionTitle, StatsCard } from "../../components/Dashboard/Components";
 import React from "react";
 import { UtilityBarCourses, DownloadSVG } from "../../components/Dashboard/Components"
 import Navbar from "../../components/Dashboard/Navbar"
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { motion } from "framer-motion"
+import { useNavigate } from 'react-router-dom';
 import UseCours from "../../Hooks/UseCours"
-import { useNavigate } from "react-router-dom";
 import UseDeleteCours from "../../Hooks/UseDeleteCours"
 export default function () {
     const navigate = useNavigate();

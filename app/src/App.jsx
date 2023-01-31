@@ -19,6 +19,7 @@ import SecurityPage from "./User/SecurityPage";
 import WebScraper from "./User/WebScraper";
 import ProductPage from "./User/Admin/ProductPage";
 import EditProductPage from "./User/Admin/EditProductPage";
+import User from './User/User'
 function App() {
   return (
     <div className="App">
@@ -37,7 +38,8 @@ function App() {
             <Route path="/Dashboard" element={<Dashboard></Dashboard>} />
             <Route path="/Dashboard/Users" element={<Dashboard_users></Dashboard_users>} />
             <Route path="/Dashboard/Courses" element={<Dashboard_courses></Dashboard_courses>} />
-            <Route path="/user" element={<UserFieldsPage />} />
+            {/* <Route path="/user" element={<UserFieldsPage />} /> */}
+            <Route path="/user" element={<User />} />
             <Route path="/user/security" element={<SecurityPage />} />
             <Route path="/user/webscraper" element={<WebScraper />} />
             <Route path="/user/cours" element={<ProductPage />} />

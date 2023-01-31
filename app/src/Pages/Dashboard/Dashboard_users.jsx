@@ -34,11 +34,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion"
 import UseUsers from '../../Hooks/UseUsers';
-
+import { useNavigate } from 'react-router-dom';
 
 export default function () {
     let users = UseUsers()
-
+    let navigate=useNavigate()
 
 
     return (<div className="dashboard">
@@ -114,7 +114,7 @@ export default function () {
                                                     borderRadius={0} border="0" _hover={{ borderColor: "#343A40 " }} _active={{}} outline="0px"
                                                 />
                                                 <MenuList>
-                                                    <MenuItem borderRadius={0} border="0" _hover={{ borderColor: "white ", border: "0px", outline: 0 }} _active={{ borderColor: "white ", border: "0px", outline: 0 }} outline="0px">View instructor	</MenuItem>
+                                                    <MenuItem borderRadius={0} border="0" _hover={{ borderColor: "white ", border: "0px", outline: 0 }} _active={{ borderColor: "white ", border: "0px", outline: 0 }} outline="0px" onClick={()=>navigate("/Instructor",{state:{auteur:user}})}>View instructor</MenuItem>
                                                     <MenuItem borderRadius={0} border="0" _hover={{ borderColor: "white ", border: "0px", outline: 0 }} _active={{ borderColor: "white ", border: "0px", outline: 0 }} outline="0px">Block instructor</MenuItem>
                                                 </MenuList>
                                             </Menu>

@@ -1,4 +1,3 @@
-import { LinksDiv } from "./UserFieldsPage";
 import {
   Stack,
   Box,
@@ -16,16 +15,13 @@ const SecurityPage = () => {
       display={"flex"}
       flexDirection={"column"}
       alignItems={"center"}
-      width={"100vw"}
       height={{
         base: "100vh",
         md: "100vh",
       }}
     >
-      <LinksDiv currentClass={"security"} />
 
       <Box
-        mt={50}
         maxW={"container.xl"}
         width={"900px"}
         // border={"1px solid #E9ECEF"}
@@ -49,7 +45,6 @@ const SecurityPage = () => {
         >
           <Box
             maxW={"container.lg"}
-            border={"2px dashed #E9ECEF"}
             display={"flex"}
             flexDirection={"row"}
           >

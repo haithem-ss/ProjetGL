@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import Vector from "../User/assets/WebScraper.png";
 import Modal from "./Modal";
-import axios from "axios";
 
 const WebScraper = () => {
   return (

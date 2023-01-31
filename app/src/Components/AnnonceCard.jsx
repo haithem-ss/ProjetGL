@@ -14,7 +14,7 @@ export default function ({infos}) {
     return <>
         <Box userSelect="none" display="flex" flexDirection="column" gap={2} minW={200} maxW={350} textAlign="left">
            
-           {infos.thumnail_url===null ? <Image
+           {infos.thumnail_url===null || infos.thumnail_url==="" ? <Image
                 src={NoImage}/>
                 :<Image
             src={infos.thumnail_url}

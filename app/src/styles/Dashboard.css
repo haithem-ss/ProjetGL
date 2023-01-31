@@ -328,6 +328,7 @@
   }
   
   .Navbar {
+    z-index: 999;
     width: 100vw;
     height: 60px;
     background-color: white;
